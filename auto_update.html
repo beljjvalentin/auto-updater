@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style>
+		#myProgress {
+			width: 100%;
+			background-color: #ddd;
+		}
+		.myBar {
+			width: 1%;
+			height: 30px;
+			background-color: #4CAF50;
+		}
+		td {
+			padding: 2px;
+		}
+	</style>
+	<script async defer src="https://apis.google.com/js/api.js"
+		onload="this.onload=function(){};handleClientLoad()"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+	<script src="values.js"></script>
+	<script src="FTpnl.js"></script>
+	<script src="DTpnl.js"></script>
+	<script src="Schedule.js"></script>
+	<script src="SuperPNL.js"></script>
+	<script src="Quality.js"></script>
+	<script src="Aff_update.js"></script>
+	<script src="Payout.js"></script>
+	<script src="invoicesGenerator.js"></script>
+	<script src="FraudDetector.js"></script>
+	<script>
+		var getDaysInMonth = function(month,year) {
+			return new Date(year, month, 0).getDate();
+		};
+		
+		// Function activation flags
+		var flag1 = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false, flag6 = false, flag7 = false;
+		var days = getDaysInMonth(month, year);
+		var days_prev = getDaysInMonth(month-1, year);
+		
+		function test_loadDoc1(){
+			flag1 = true;
+		}
+		function test_loadDoc2(){
+			flag2 = true;
+		}
+		function test_loadDoc3(){
+			flag3 = true;
+		}
+		function test_loadDoc4(){
+			flag4 = true;
+		}
+		function test_loadDoc5(){
+			flag5 = true;
+		}
+		function test_loadDoc6(){
+			flag6 = true;
+		}
+		function test_loadDoc8(){
+			//DTpnl_clearAll();
+			DTpnl_HasoffersCall_full();
+		}
+
+		function createArray(length) {
+			var arr = new Array(length || 0),
+			i = length;
+
+			if (arguments.length > 1) {
+				var args = Array.prototype.slice.call(arguments, 1);
+				while(i--) arr[length-1 - i] = createArray.apply(this, args);
+			}
+			return arr;
+		}
+		
+		function startTime() {
+			var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			if (m%20 == 0 && s == 0 || flag1){ 
+			    flag1 = false;
+				move_progress("FTpnl_pr");
+				FTpnl_loadDoc();
+				FTlola_loadDoc()
+				document.getElementById('FTpnl').innerHTML =
+					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+			}
+			if (m%30 == 0 && s == 10 || flag2){
+      			flag2 = false;
+				move_progress("Schedule_pr");
+				clearAll();
+				clearAllToday();
+				Plus35Func(1);
+				document.getElementById('Schedule').innerHTML =
+					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+			}
+			if (m%20 == 0 && s == 40 || flag3){
+     			flag3 = false;
+				move_progress("SuperPNL_pr");
+				SuperPNL_HasoffersCall(month);
+				document.getElementById('SuperPNL').innerHTML =
+					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+			}
+			if (h == 10 && m == 47 && s == 40 || flag5){ 
+				flag5 = false;
+				move_progress("Aff_invoice_pr");
+				counter = parseInt(document.getElementById("skip").value);
+				//counter = 30;
+				HasoffersCall(items[counter][0], items[counter][1], month, 3, items[counter][2]); // 3 is sub_id
+				//addAllSheets();
+				document.getElementById('Aff_invoice').innerHTML =
+					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+			}
+			if (m%20 == 0 && s == 30 || flag6){ 
+				flag6 = false;
+				move_progress("Payouts_pr");
+				Payout_HasoffersCall();
+				document.getElementById('Payout').innerHTML =
+					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+			}
+			if(flag7){
+			
+			}
+			
+			m = checkTime(m);
+			s = checkTime(s);
+			document.getElementById('txt').innerHTML =
+			h + ":" + m + ":" + s;
+			var t = setTimeout(startTime, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			return i;
+		}
+		function move_progress(str) {
+			var elem = document.getElementById(str);   
+			var width = 10;
+			var id = setInterval(frame, 20);
+			function frame() {
+				if (width >= 100) {
+					clearInterval(id);
+				} else {
+					width++; 
+					elem.style.width = width + '%'; 
+					elem.innerHTML = width * 1  + '%';
+				}
+			}
+		}
+		function initClient() {
+			var API_KEY = 'AIzaSyB6DlM6H1ADmqx4XKznDhZBhR7jd9c0JRo';  // TODO: Update placeholder with desired API key.
+			var CLIENT_ID = '989893375160-fcc9mkrastocu56sgukfdiagpsrme4mm.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+			var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+
+			gapi.client.init({
+				'apiKey': API_KEY,
+				'clientId': CLIENT_ID,
+				'scope': SCOPE,
+				'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+			}).then(function() {
+				gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+				updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+			});
+		}
+		function handleClientLoad() {
+		  gapi.load('client:auth2', initClient);
+		}
+		function handleSignInClick(event) {
+		  gapi.auth2.getAuthInstance().signIn();
+		}
+		function handleSignOutClick(event) {
+		  gapi.auth2.getAuthInstance().signOut();
+		}
+		// Main function chain update 
+		function updateSignInStatus(isSignedIn) {
+			if (isSignedIn) {
+				//setTimeout(loadDoc(), 1000);
+				console.log("Sign in complete");
+				document.getElementById("sign_in").innerHTML = "Signed in";
+			}
+		}
+	</script>
+</head>
+<body onload="startTime()">
+	Current time: <div id="txt"></div></br>
+	<table border="1px">
+		<thead>
+			<tr>
+				<td>Component</td>
+				<td width="100px">Progress</td>
+				<td width="150px">Last updated</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>FTpnl</td><td><div id="myProgress"><div id="FTpnl_pr" class="myBar">10%</div></div></td><td><div id="FTpnl">0</div></td>
+			</tr><tr>			
+				<td>Schedule update</td><td><div id="myProgress"><div id="Schedule_pr" class="myBar">10%</div></div></td><td><div id="Schedule">0</div></td>
+			</tr><tr>			
+				<td>Super PNL</td><td><div id="myProgress"><div id="SuperPNL_pr" class="myBar">10%</div></div></td><td><div id="SuperPNL">0</td>
+			</tr><tr>
+				<td>Affiliate invoices</td><td><div id="myProgress"><div id="Aff_invoice_pr" class="myBar">10%</div></div></td><td><div id="Aff_invoice">0</td>
+			</tr><tr>
+				<td>Payouts</td><td><div id="myProgress"><div id="Payouts_pr" class="myBar">10%</div></div></td><td><div id="Payout">0</td>
+				<tr>
+				<td>Invoice generation</td><td><div id="myProgress"><div id="Invoices_pr" class="myBar">10%</div></div></td><td><div id="Invoice">0</td>
+			</tr>
+		<tbody>
+	</table>
+	<p id="sign_in">Google sign-in (first time only)</p>
+	<button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+	<p>Manual testing buttons</p>
+	<button id="test1" onclick="test_loadDoc1()">Test FTpnl</button></br>
+	<button id="test2" onclick="test_loadDoc2()">Test Schedule update</button></br>
+	<button id="test3" onclick="test_loadDoc3()">Test Super PNL</button></br>
+	<button id="test5" onclick="test_loadDoc5()">Test Affiliate invoices</button>
+	Skip: <input type="number" value="30" id="skip" style="width: 50px;"></input></br>
+	<button id="test6" onclick="test_loadDoc6()">Test Payouts</button></br>
+	<button id="test7" onclick="addAllSheets(month)">Add Sheets to Affiliates</button><br>
+	<button id="test8" onclick="test_loadDoc8()">Test DTpnl</button><br>
+	<button id="test9" onclick="move_progress('Invoices_pr'); invoiceGen_HasoffersCall(month-1, 1)">Test invoiceGen</button></br>
+	<a href="./next_month_form.html">Settings</a>
+</body>
+</html>
