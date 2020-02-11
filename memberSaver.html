@@ -1,0 +1,161 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="application/javascript">
+
+	async function postAxios( text, profile, gender, first_name, email, j){
+		writer[j] = 'Denied';
+		let url = 'https://backend-api.dating.fortel.network/api/v1/register';
+		var bodyFormData = new FormData();
+		bodyFormData.set('message', text);
+		bodyFormData.set('to_profile', profile);
+		bodyFormData.set('gender', gender);
+		bodyFormData.set('name', first_name);
+		bodyFormData.set('email', email);
+		let options = {
+					method: 'POST',
+					url: url,
+					headers: {
+						'XMLHttpRequest': 'X-Requested-With',
+						'Content-Type': 'multipart/form-data',
+						'campaign-name': 'https://2020dating.com'
+					},
+					data: bodyFormData
+				};
+		let response = await axios(options);
+		let responseOK = response && response.status === 200 && response.statusText === 'OK';
+		if (responseOK) {
+			let data = await response.data;
+			console.log(data);
+			writer[j] = 'Accepted';
+			// do something with data
+		} else writer[j] = 'Accepted';
+	}
+	//postAxios();
+	</script>
+    <script>
+	var writer = new Array(250);
+    function makeApiCallRead() {
+		var params = {
+			spreadsheetId: '1mfk5-_CTGtG8lZq3WCeWn0ui3LreiOKolZ-d5fyLOWM', 
+			range: 'A2:F10',
+			valueRenderOption: 'FORMATTED_VALUE',  
+			dateTimeRenderOption: 'SERIAL_NUMBER',
+		};
+		var request = gapi.client.sheets.spreadsheets.values.get(params);
+		request.then(function(response) {
+			// TODO: Change code below to process the `response` object:
+			//console.log(response.result);
+			processData(response.result);
+		}, function(reason) {
+			console.error('error: ' + reason.result.error.message);
+		});
+    }
+	
+	function makeApiCallWriteAll() {
+		var params = {
+			spreadsheetId: '1mfk5-_CTGtG8lZq3WCeWn0ui3LreiOKolZ-d5fyLOWM',
+			range: 'F2:F10', 
+			valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
+		};
+		var valueRangeBody = {
+			"range": "F2:F10",  //Set this to cell want to add 'x' to.
+			"majorDimension": "ROWS",
+			"values": [ // values will be pushed later	
+				[ writer[0] ], 
+				[ writer[1] ],
+				[ writer[2] ]
+			],          
+		};
+		/*for(var i=0; i<writer.length; i++)
+			valueRangeBody.values.push(writer[i]);*/
+		var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+		request.then(function(response) {
+			console.log(response.result);
+		}, function(reason) {
+			console.error('error: ' + reason.result.error.message);
+		});
+    }
+
+    function initClient() {
+		var API_KEY = 'AIzaSyB6DlM6H1ADmqx4XKznDhZBhR7jd9c0JRo';  
+		var CLIENT_ID = '989893375160-fcc9mkrastocu56sgukfdiagpsrme4mm.apps.googleusercontent.com'; 
+		var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+
+		gapi.client.init({
+			'apiKey': API_KEY,
+			'clientId': CLIENT_ID,
+			'scope': SCOPE,
+			'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+		}).then(function() {
+			gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+			updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+		});
+    }
+
+    function handleClientLoad() {
+		gapi.load('client:auth2', initClient);
+    }
+
+    function updateSignInStatus(isSignedIn) {
+		if (isSignedIn) {
+			//makeApiCall();
+		}
+    }
+
+    function handleSignInClick(event) {
+		gapi.auth2.getAuthInstance().signIn();
+    }
+
+    function handleSignOutClick(event) {
+		gapi.auth2.getAuthInstance().signOut();
+    }
+	
+	function startTime() {
+		var today = new Date();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		var s = today.getSeconds();
+		
+		if(m % 5 == 0 && s % 30 == 0){
+			makeApiCallRead();
+		}
+				
+		m = checkTime(m);
+		s = checkTime(s);
+		document.getElementById('time_display').innerHTML =
+		h + ":" + m + ":" + s;
+		var t = setTimeout(startTime, 500);
+	}
+		
+	function checkTime(i) {
+		if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+		return i;
+	}
+	
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}	
+	
+	async function processData(data){
+		console.log(data);
+		for(var i=0; i<data.values.length; i++){
+			console.log("Data: "+data.values[i][5]);
+			if(data.values[i][5] == null){
+				console.log("=>"+data.values[i][0]);
+				postAxios('Hi, my name is'+data.values[i][1], '1882036', '1', data.values[i][1], data.values[i][0], i);
+			}
+		}
+		await sleep(5000);
+		makeApiCallWriteAll();
+	}
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+	<body onload="startTime()">
+	Current time: <div id="time_display"></div></br>
+    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+	<h3>Adding member data for Jane 40Plus</h3>
+	<button onclick="makeApiCallRead()">Load values</button>
+	</body>
