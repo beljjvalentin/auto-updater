@@ -29,7 +29,7 @@ function loadXMLDoc() {
 	xhttp.send(); 
 }
 
-function makeApiCallWriteAll() {
+function makeApiCallWriteFraud() {
 	  
 	  var params = {
         spreadsheetId: '1rtkPPi9Y_VqNZbohlxPyPg14ChaCADYetgB8by526SY',
