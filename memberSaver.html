@@ -36,7 +36,7 @@
     function makeApiCallRead() {
 		var params = {
 			spreadsheetId: '1mfk5-_CTGtG8lZq3WCeWn0ui3LreiOKolZ-d5fyLOWM', 
-			range: 'A2:F10',
+			range: 'A2:F999',
 			valueRenderOption: 'FORMATTED_VALUE',  
 			dateTimeRenderOption: 'SERIAL_NUMBER',
 		};
@@ -53,11 +53,11 @@
 	function makeApiCallWriteAll() {
 		var params = {
 			spreadsheetId: '1mfk5-_CTGtG8lZq3WCeWn0ui3LreiOKolZ-d5fyLOWM',
-			range: 'F2:F10', 
+			range: 'F2:F999', 
 			valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
 		};
 		var valueRangeBody = {
-			"range": "F2:F10",  //Set this to cell want to add 'x' to.
+			"range": "F2:F999",  //Set this to cell want to add 'x' to.
 			"majorDimension": "ROWS",
 			"values": [ // values will be pushed later	
 				/*[ writer[0] ], 
