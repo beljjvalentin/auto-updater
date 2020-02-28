@@ -66,7 +66,7 @@
 			],          
 		};
 		for(var i=0; i<writer.length; i++)
-			valueRangeBody.values.push(writer[i]);
+			valueRangeBody.values.push([writer[i]]);
 		var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 		request.then(function(response) {
 			console.log(response.result);
