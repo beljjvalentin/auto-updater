@@ -60,13 +60,13 @@
 			"range": "F2:F10",  //Set this to cell want to add 'x' to.
 			"majorDimension": "ROWS",
 			"values": [ // values will be pushed later	
-				[ writer[0] ], 
+				/*[ writer[0] ], 
 				[ writer[1] ],
-				[ writer[2] ]
+				[ writer[2] ]*/
 			],          
 		};
-		/*for(var i=0; i<writer.length; i++)
-			valueRangeBody.values.push(writer[i]);*/
+		for(var i=0; i<writer.length; i++)
+			valueRangeBody.values.push(writer[i]);
 		var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 		request.then(function(response) {
 			console.log(response.result);
