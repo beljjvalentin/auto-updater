@@ -115,7 +115,7 @@
 		var m = today.getMinutes();
 		var s = today.getSeconds();
 		
-		if(m % 1 == 0 && s % 30 == 0){
+		if(m % 2 == 0 && s % 30 == 0){
 			makeApiCallRead();
 		}
 				
@@ -138,7 +138,7 @@
 	async function processData(data){
 		//console.log(data);
 		for(var i=0; i<data.values.length; i++){
-			//console.log("Data: "+data.values[i][5]);
+			console.log("Data: "+data.values[i][5]);
 			if(data.values[i][5] == null){
 				console.log("=>"+data.values[i][0]);
 				postAxios('Hi, my name is'+data.values[i][1], '1909591', '1', data.values[i][1], data.values[i][0], i);
