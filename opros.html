@@ -3,13 +3,24 @@
 <body>
 <script>
 
+var answer = [true, false, false];
+
 var check = function(){
-	console.log("Check");
+	document.getElementById("right").style.display = "none";
+	document.getElementById("wrong").style.display = "none";	
 	
-	document.getElementsByName("city")
-	for(var i = 0; i < document.getElementsByName("city").length ; i++){
-		console.log(document.getElementsByName("city")[i].checked);
+	for(var i = 0; i < document.getElementsByName("city").length; i++){
+		var checked = document.getElementsByName("city")[i].checked;
+		if(checked == true && answer[i] == true){
+			document.getElementById("right").style.display = "inline"; 
+			break;
+		}
+		else{
+			document.getElementById("wrong").style.display = "inline";
+		}
+		//console.log(checked);
 	}
+	
 }
 
 </script>
@@ -34,6 +45,12 @@ var check = function(){
   <input type="radio" id="age3" name="age" value="8">
   <label for="age3">=8</label><br><br>
   <input type="submit" value="Submit" onclick="check()">
-
+  <label style="color: green" id="right"><b>Right</b></label>
+  <label style="color: red"   id="wrong"><b>Wrong</b></label>
+  
 </body>
+<script>
+	document.getElementById("right").style.display = "none";
+	document.getElementById("wrong").style.display = "none";	
+</script>
 </html>
