@@ -3,7 +3,8 @@
 <body>
 <script>
 
-var answer = [true, false, false];
+var answer  = [true, false, false];
+var answer1 = [false, true, false];
 
 var check = function(){
 	document.getElementById("right").style.display = "none";
@@ -11,18 +12,31 @@ var check = function(){
 	
 	for(var i = 0; i < document.getElementsByName("city").length; i++){
 		var checked = document.getElementsByName("city")[i].checked;
-		if(checked == true && answer[i] == true){
+		if(checked == answer[i]){
 			document.getElementById("right").style.display = "inline"; 
-			break;
 		}
 		else{
 			document.getElementById("wrong").style.display = "inline";
+			break;
 		}
-		//console.log(checked);
+		console.log(checked + "=" + answer[i]);
+	}
+	
+	document.getElementById("right1").style.display = "none";
+	document.getElementById("wrong1").style.display = "none";	
+	for(var i = 0; i < document.getElementsByName("num").length; i++){
+		var checked = document.getElementsByName("num")[i].checked;
+		if(checked == answer1[i]){
+			document.getElementById("right1").style.display = "inline"; 
+		}
+		else{
+			document.getElementById("wrong1").style.display = "inline";
+			break;
+		}
+		console.log(checked + "=" + answer[i]);
 	}
 	
 }
-
 </script>
 
 <h1>Display Radio Buttons</h1>
@@ -38,19 +52,23 @@ var check = function(){
   <br>  
 
   <p>Please select right answer 2+2*2:</p>
-  <input type="radio" id="age1" name="age" value="4">
+  <input type="radio" id="age1" name="num" value="4">
   <label for="age1">=4</label><br>
-  <input type="radio" id="age2" name="age" value="6">
+  <input type="radio" id="age2" name="num" value="6">
   <label for="age2">=6</label><br>  
-  <input type="radio" id="age3" name="age" value="8">
+  <input type="radio" id="age3" name="num" value="8">
   <label for="age3">=8</label><br><br>
   <input type="submit" value="Submit" onclick="check()">
   <label style="color: green" id="right"><b>Right</b></label>
   <label style="color: red"   id="wrong"><b>Wrong</b></label>
+   <label style="color: green" id="right1"><b>Right</b></label>
+  <label style="color: red"    id="wrong1"><b>Wrong</b></label>
   
 </body>
 <script>
 	document.getElementById("right").style.display = "none";
 	document.getElementById("wrong").style.display = "none";	
+	document.getElementById("right1").style.display = "none";
+	document.getElementById("wrong1").style.display = "none";	
 </script>
 </html>
