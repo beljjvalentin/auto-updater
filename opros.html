@@ -5,11 +5,11 @@
 
 var check = function(){
 	console.log("Check");
-	if (value="London"){
-		console.log ("1 correct answer")
+	
+	document.getElementsByName("city")
+	for(var i = 0; i < document.getElementsByName("city").length ; i++){
+		console.log(document.getElementsByName("city")[i].checked);
 	}
-	else
-		console.log("0 correct answers")
 }
 
 </script>
@@ -17,11 +17,11 @@ var check = function(){
 <h1>Display Radio Buttons</h1>
 
   <p>Please select capital of UK:</p>
-  <input type="radio" id="male" name="city" value="London">
+  <input type="radio" id="city1" name="city" value="London">
   <label for="London">London</label><br>
-  <input type="radio" id="female" name="city" value="Brussels">
+  <input type="radio" id="city2" name="city" value="Brussels">
   <label for="Brussels">Brussels</label><br>
-  <input type="radio" id="other" name="city" value="Heathrow">
+  <input type="radio" id="city3" name="city" value="Heathrow">
   <label for="Heathrow">Heathrow</label>
 
   <br>  
