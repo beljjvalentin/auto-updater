@@ -5,7 +5,7 @@
 	var writer3 = createArray(150, 12);
 	var writer4 = createArray(150, 12);
 	var writer5 = createArray(150, 12);
-	var QAoffers = ["LoveMatch","2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove",
+	var QAoffers = ["LoveMatch","2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
 					"Medium Amanda", "Medium Amanda UK", "Medium Amanda FR", "Medium Amanda US",
 					"Medium Theresa", "Medium Christina"];
@@ -15,12 +15,12 @@
 					"Amanda+UK", "Theresa+UK", "Christina+UK", 
 					"Amanda+US", "Theresa+US", "Christina+US", 
 					"Amanda+CA", "Amanda+DE", "Amanda+FR", "Amanda+NZ", "Christina+NZ", "Amanda+SE", "Amanda+IT", "Anja"];
-	var DToffers = ["35plusdate+AU","2020Dating+AU", "40pluslove+AU", "allyoucanlove+AU", "hellodate+AU" ,"lovematch+AU", "luckydating+AU", "succesfuldating+AU",
-					"35plusdate+BE","2020Dating+BE", "40pluslove+BE", "allyoucanlove+BE", "hellodate+BE" , "lovematch+BE", "luckydating+BE", "succesfuldating+BE",
-					"35plusdate+NL","2020Dating+NL", "40pluslove+NL", "allyoucanlove+NL", "hellodate+NL", "lovematch+NL", "luckydating+NL", "succesfuldating+NL",
-					"35plusdate+NZ","2020Dating+NZ", "40pluslove+NZ", "allyoucanlove+NZ", "hellodate+NZ", "lovematch+NZ", "luckydating+NZ", "succesfuldating+NZ",
+	var DToffers = ["35plusdate+AU","2020Dating+AU", "40pluslove+AU", "allyoucanlove+AU", "hellodate+AU" ,"lovematch+AU", "luckydating+AU", "perfectmatch+AU", "succesfuldating+AU",
+					"35plusdate+BE","2020Dating+BE", "40pluslove+BE", "allyoucanlove+BE", "hellodate+BE" , "lovematch+BE", "luckydating+BE", "perfectmatch+BE", "succesfuldating+BE",
+					"35plusdate+NL","2020Dating+NL", "40pluslove+NL", "allyoucanlove+NL", "hellodate+NL", "lovematch+NL", "luckydating+NL", "perfectmatch+NL", "succesfuldating+NL",
+					"35plusdate+NZ","2020Dating+NZ", "40pluslove+NZ", "allyoucanlove+NZ", "hellodate+NZ", "lovematch+NZ", "luckydating+NZ", "perfectmatch+NZ", "succesfuldating+NZ",
 					"35pluslove+SE", "lovematch+SE",
-					"35plusdate+UK","2020Dating+UK", "40pluslove+UK", "allyoucanlove+UK", "hellodate+UK", "lovematch+UK", "luckydating+UK", "succesfuldating+UK",
+					"35plusdate+UK","2020Dating+UK", "40pluslove+UK", "allyoucanlove+UK", "hellodate+UK", "lovematch+UK", "luckydating+UK", "perfectmatch+UK", "succesfuldating+UK",
 					"yourlovematch+US"];
 	
 	var todayDate = new Date();
@@ -141,14 +141,14 @@ function makeApiCallWriteDatingDays() {
 		spreadsheetId: Schedule_url, // TODO: Update placeholder value. Auto schedule
 
         // The A1 notation of the values to update.
-        range: 'DTdays!A3:CK60',  // TODO: Update placeholder value.
+        range: 'DTdays!A3:CU60',  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       };
 
       var valueRangeBody = {
-		"range": "DTdays!A3:CK60",  //Set this to cell want to add 'x' to.
+		"range": "DTdays!A3:CU60",  //Set this to cell want to add 'x' to.
 		"majorDimension": "ROWS",
 		"values": [
 			writer5[0],	writer5[1],	writer5[2],	writer5[3],	writer5[4],	writer5[5],	writer5[6],	writer5[7],	writer5[8],	writer5[9],	writer5[10], writer5[11], writer5[12], writer5[13],	writer5[14],writer5[15],

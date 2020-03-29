@@ -2,18 +2,18 @@
 	var xhttp, str, sum=0;
 	var ALLaffiliates = [];
 	var ALLoffers = [66, 68, 62, 64, 60, 297, 42, 44, 38, 40, 58, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 295,
-							314,316,318,324,326,
+							314,316,318,324,326,   327,331,330,329,328,  349, 348, 351, 347, 350,
 							4, 36, 122, 76, 124, 126, 229, 199, 98, 100, 193, 191, 189, 237, 233, 241, 245, 239, 247, 249, 279, 281, 283, 259, 257, 261, 255, 285, 253];
 	
 	var Basic_writer = [];
-	var Payout_writer = createArray(850, 62); // When adjusting also change row 60
+	var Payout_writer = createArray(850, 68); // When adjusting also change row 60
 	function Payout_clearAll() {
       var params = {
         // The ID of the spreadsheet to update.
         spreadsheetId: '1rFhqvqdbBF2muM8ZnyASQdkzILYfgbvxPZrkuEE0HFU',  // TODO: Update placeholder value.
 
         // The A1 notation of the values to clear.
-        range: 'affPayouts!A4:BG600',  // TODO: Update placeholder value.
+        range: 'affPayouts!A4:BQ600',  // TODO: Update placeholder value.
       };
 
       var clearValuesRequestBody = {
@@ -36,14 +36,14 @@
 		spreadsheetId: '1rFhqvqdbBF2muM8ZnyASQdkzILYfgbvxPZrkuEE0HFU',
 
         // The A1 notation of the values to update.
-        range: 'affPayouts!A4:BG600',  // TODO: Update placeholder value.
+        range: 'affPayouts!A4:BQ600',  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       };
 
       var valueRangeBody = {
-		"range": 'affPayouts!A4:BG600',  //Set this to cell want to add 'x' to.
+		"range": 'affPayouts!A4:BQ600',  //Set this to cell want to add 'x' to.
 		"majorDimension": "ROWS",
 		"values": [
 			//['Writing payouts from hasoffers','','','','','']
@@ -57,7 +57,7 @@
 	  valueRangeBody.values.push(Basic_writer);
 	  for(var i=0; i<550; i++)
 		  valueRangeBody.values.push(Payout_writer[i]);
-	  Payout_writer = createArray(850, 62); // To bypass overflow error
+	  Payout_writer = createArray(850, 68); // To bypass overflow error
 	  
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
