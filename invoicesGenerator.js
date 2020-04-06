@@ -2,7 +2,8 @@
 	var page = 1, c=0;
 	var Divinetion = ["LoveMatch", "35plusdate", "SuccesfulDating", "40pluslove"];
 	var Plus5Concepts = ["Amanda", "Theresa", "Christina", "Anja"];
-	var GreenLights = ["LoveMatch", "35plusdate", "SuccesfulDating", "40pluslove", "LuckyDating", "AllYouCanLove", "YourLoveMatch", "HelloDate", "2020Dating"];
+	var GreenLights = [ "LoveMatch", "35plusdate", "SuccesfulDating", "40pluslove", "LuckyDating", 
+						"AllYouCanLove", "YourLoveMatch", "HelloDate", "2020Dating", "PerfectMatch"];
 	
 	for(var j=0; j<invoiceGen.length; j++){
 		invoiceGen[j][1] = 0;
