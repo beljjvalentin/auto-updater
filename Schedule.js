@@ -493,7 +493,7 @@ function showHint6(activate) {
  }
 
 function TodayPnl(){ 
-     // TheresaQApnl request
+     // Today pnl request
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -506,7 +506,7 @@ function TodayPnl(){
 					writer2[i][2] = data.response.data.data[i].Stat.clicks;
 					writer2[i][3] = parseInt(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
 					writer2[i][4] = parseInt(data.response.data.data[i].Stat.revenue / 10);
-					writer2[i][5] = data.response.data.data[i].Category.name;;
+					writer2[i][5] = data.response.data.data[i].Category.name;
 				}
 			}
 			writer2.sort(sortFunction);

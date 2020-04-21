@@ -31,13 +31,14 @@
 	<script src="Payout.js"></script>
 	<script src="invoicesGenerator.js"></script>
 	<script src="FraudDetector.js"></script>
+	<script src="DailyTraffic.js"></script>
 	<script>
 		var getDaysInMonth = function(month,year) {
 			return new Date(year, month, 0).getDate();
 		};
 		
 		// Function activation flags
-		var flag1 = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false, flag6 = false, flag7 = false;
+		var flag1 = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false, flag6 = false, flag7 = false, flag8 = false, flag9 = false;
 		var days = getDaysInMonth(month, year);
 		var days_prev = getDaysInMonth(month-1, year);
 		
@@ -62,6 +63,9 @@
 		function test_loadDoc8(){
 			//DTpnl_clearAll();
 			DTpnl_HasoffersCall_full();
+		}
+		function test_loadDoc9(){
+			flag9 = true;
 		}
 
 		function createArray(length) {
@@ -121,8 +125,12 @@
 				document.getElementById('Payout').innerHTML =
 					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
-			if(flag7){
-			
+			if(h == 11 && m%20 == 0 && s == 30 || flag9){
+				flag9 = false;
+				move_progress("Traffic_pr");
+				document.getElementById('Traffic').innerHTML =
+					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+				test_DailyPnl();
 			}
 			
 			m = checkTime(m);
@@ -206,6 +214,8 @@
 				<td>Payouts</td><td><div id="myProgress"><div id="Payouts_pr" class="myBar">10%</div></div></td><td><div id="Payout">0</td>
 				<tr>
 				<td>Invoice generation</td><td><div id="myProgress"><div id="Invoices_pr" class="myBar">10%</div></div></td><td><div id="Invoice">0</td>
+			</tr><tr>
+				<td>Traffic per day</td><td><div id="myProgress"><div id="Traffic_pr" class="myBar">10%</div></div></td><td><div id="Traffic">0</td>
 			</tr>
 		<tbody>
 	</table>
@@ -222,6 +232,7 @@
 	<button id="test7" onclick="addAllSheets(month)">Add Sheets to Affiliates</button><br>
 	<button id="test8" onclick="test_loadDoc8()">Test DTpnl</button><br>
 	<button id="test9" onclick="move_progress('Invoices_pr'); invoiceGen_HasoffersCall(month-1, 1)">Test invoiceGen</button></br>
+	<button id="test8" onclick="test_loadDoc9()">Test Daily Traffic</button><input style="display:none;" type="date" id="myDate" value=""><br>
 	<a href="./next_month_form.html">Settings</a>
 </body>
 </html>
