@@ -1,4 +1,4 @@
-	var i=0,j=0,k=0,a=0;
+var i=0,j=0,k=0,a=0;
 	var xhttp, str, sum=0;
 	var ALLaffiliates = [];
 	var ALLoffers = [66, 68, 62, 64, 60, 297, 42, 44, 38, 40, 58, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 295,
