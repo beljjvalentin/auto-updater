@@ -1,0 +1,301 @@
+<html>
+
+<head>
+    <title>
+        Викторина
+    </title>
+
+    <style>
+        body {
+            margin: 20px;
+        }
+        
+        h1 {
+            color: crimson;
+            font-size: 35px;
+        }
+        
+        .title {
+            font-size: 30px;
+            text-align: center;
+            background-color: rgb(204, 221, 49);
+        }
+        
+        h3 {
+            font-size: 25px;
+            text-align: center;
+            border: 1px solid red
+        }
+        
+        .price {
+            font-size: 30px;
+            text-align: center;
+            color: rgb(141, 8, 8);
+        }
+        
+        .quescion {
+            font-size: 25px;
+        }
+    </style>
+
+    <script>
+        function check() {
+            var mas = document.querySelectorAll(":checked");
+            var points = 0;
+            for (var i = 0; i < mas.length; i++) {
+                var el = mas[i];
+                points = points + (+el.value);
+            }
+            document.getElementById("ociki").innerText = "Вы набрали " + points + " очков(а)";
+        }
+    </script>
+</head>
+
+<body>
+    <p class="title">
+        Предлагаю вам пройти тест/викторину и определить ваши знания в Старкрафте
+    </p>
+    <h3>
+        Правила:<br> Вам даны вопросы, оцениваемые в разное количество баллов.<br> На вопросы, оцениваемые в 1,2,3 баллов только 1 правильный ответ.<br> На вопросы, оцениваемые в 4 балла - 2 правильных ответа.<br> Вопросы, оцениваемые в 5 баллов - бонусные:
+        на них 1 правильный ответ, <br> но если Вы ответите неправильно, то у Вас будут вычтены 3 балла.<br> По окончанию работы нажмите "Проверить"<br> Всего очков: 63 <br> УДАЧИ! <br> AND DON'T PRESS F12!!!
+        <br>
+
+    </h3>
+    <p class="price">
+        Вопросы, оцениваемые в 1 балл
+    </p>
+    <h1><br>Вопрос №1</h1>
+    <p class="quescion">
+        <br>Кто победит в сражении баньши и сталкера 1 на 1 без улучшений?
+        <br><input type="radio" name="q1" value="1">победит баньша
+        <br><input type="radio" name="q1" value="0">победит сталкер
+        <br><input type="radio" name="q1" value="0">будет ничья
+        <br><input type="radio" name="q1" value="0">как я могу знать эту ерунду?<br>
+    </p>
+
+    <h1><br>Вопрос №2</h1>
+    <p class="quescion">
+        <br>Сколько карт в одном ладдерном сезоне?
+        <br><input type="radio" name="q2" value="0">5
+        <br><input type="radio" name="q2" value="0">6
+        <br><input type="radio" name="q2" value="1">7
+        <br><input type="radio" name="q2" value="0">9<br>
+    </p>
+
+
+    <h1><br>Вопрос №3</h1>
+    <p class="quescion">
+        <br>Сколько стоит хата зергов?
+        <br><input type="radio" name="q3" value="0">250
+        <br><input type="radio" name="q3" value="1">300
+        <br><input type="radio" name="q3" value="0">350
+        <br><input type="radio" name="q3" value="0">400<br>
+    </p>
+
+    <h1><br>Вопрос №4</h1>
+    <p class="quescion">
+        <br>Сколько MMR у Serral-а?
+        <br><input type="radio" name="q4" value="0">3400
+        <br><input type="radio" name="q4" value="0">6200
+        <br><input type="radio" name="q4" value="1">7000+
+        <br><input type="radio" name="q4" value="0">5380<br>
+    </p>
+
+    <h1><br>Вопрос №5</h1>
+    <p class="quescion">
+        <br>Какое существо мог раньше производить Нексус?
+        <br><input type="radio" name="q5" value="1">mother core
+        <br><input type="radio" name="q5" value="0">zealot
+        <br><input type="radio" name="q5" value="0">dragoon
+        <br><input type="radio" name="q5" value="0">nullifire<br>
+    </p>
+
+    <p class="price">
+        Вопросы, оцениваемые в 2 балла
+    </p>
+
+    <h1><br>Вопрос №6</h1>
+    <p class="quescion">
+
+        <br>Сколько существ зерга обладают энергией?
+        <br> <input type="radio" name="q6" value="0">1
+        <br> <input type="radio" name="q6" value="0">2
+        <br> <input type="radio" name="q6" value="0">3
+        <br> <input type="radio" name="q6" value="2">4<br>
+    </p>
+
+
+    <h1><br>Вопрос №7</h1>
+    <p class="quescion">
+        <br>Какое самое дорогое здание в игре?
+        <br><input type="radio" name="q7" value="0">fusion core
+        <br><input type="radio" name="q7" value="2">fleet beacon
+        <br><input type="radio" name="q7" value="0">spire
+        <br><input type="radio" name="q7" value="0">hive<br>
+    </p>
+
+    <h1><br>Вопрос №8</h1>
+    <p class="quescion">
+        <br>Занимает ли королева и оверлорд лимит?
+        <br><input type="radio" name="q8" value="0">оба да
+        <br><input type="radio" name="q8" value="0">оба нет
+        <br><input type="radio" name="q8" value="2">королева - да, оверлорд - нет
+        <br><input type="radio" name="q8" value="0">королева - нет, оверлорд - да<br>
+    </p>
+
+    <h1><br>Вопрос №9</h1>
+    <p class="quescion">
+        <br>Сколько у протоссв воздушных юнитов?
+        <br><input type="radio" name="q9" value="0">5
+        <br><input type="radio" name="q9" value="0">6
+        <br><input type="radio" name="q9" value="0">7
+        <br><input type="radio" name="q9" value="2">8<br>
+    </p>
+
+    <h1><br>Вопрос №10</h1>
+    <p class="quescion">
+        <br>Что это за карта? <br>
+        <img src="https://liquipedia.net/commons/images/thumb/8/81/Acropolis_SC2_Map.jpg/926px-Acropolis_SC2_Map.jpg">
+        <br><input type="radio" name="q9" value="0">Simulacrum
+        <br><input type="radio" name="q9" value="0">Arctic Dream
+        <br><input type="radio" name="q9" value="2">Acropolis
+        <br><input type="radio" name="q9" value="0">Lost and Found<br>
+    </p>
+    <p class="price">
+        Вопросы, оцениваемые в 3 балла
+    </p>
+
+    <h1><br>Вопрос №11</h1>
+    <p class="quescion">
+        <br>Какую страну представляет игрок "Clem"?
+        <br><input type="radio" name="q11" value="0">Германия
+        <br><input type="radio" name="q11" value="3">Франция
+        <br><input type="radio" name="q11" value="0">Корея
+        <br><input type="radio" name="q11" value="0">Россия<br>
+    </p>
+
+    <h1><br>Вопрос №12</h1>
+    <p class="quescion">
+        <br>Как перевели на русский карту "Ever Dream", которая есть в этом ладдерном сезоне?
+        <br><input type="radio" name="q12" value="3">Помечтаем
+        <br><input type="radio" name="q12" value="0">Всегда мечтай
+        <br><input type="radio" name="q12" value="0">Почемтаем
+        <br><input type="radio" name="q12" value="0">Мечты<br>
+    </p>
+
+    <h1><br>Вопрос №13</h1>
+    <p class="quescion">
+        <br>Какую команду на данный момент представляет "Vanya"?
+        <br><input type="radio" name="q13" value="0">Starcom
+        <br><input type="radio" name="q13" value="0">3D
+        <br><input type="radio" name="q13" value="0">HBGS
+        <br><input type="radio" name="q13" value="3">Никакую<br>
+    </p>
+    <h1><br>Вопрос №14</h1>
+    <p class="quescion">
+        <br>У кого больше всего запас здаровья?
+        <br><input type="radio" name="q14" value="0">морпех
+        <br><input type="radio" name="q14" value="0">рэвэджэр
+        <br><input type="radio" name="q14" value="3">роуч
+        <br><input type="radio" name="q14" value="0">мина<br>
+    </p>
+
+    <h1><br>Вопрос №15</h1>
+    <p class="quescion">
+        <br>Кто это?<br>
+        <img src="https://liquipedia.net/commons/images/d/dc/Awers_WESG_2018.jpg"><br>
+        <br><input type="radio" name="q15" value="0">Hellraiser
+        <br><input type="radio" name="q15" value="0">Strange
+        <br><input type="radio" name="q15" value="3">Awers
+        <br><input type="radio" name="q15" value="0">Dimaga<br>
+    </p>
+    <p class="price">
+        Вопросы, оцениваемые в 4 балла
+    </p>
+
+    <h1><br>Вопрос №16</h1>
+    <p class="quesсion">
+        <br> Кто играл в финале Blizzcon 2018?
+        <br><input type="checkbox" name="q16" value="2">Serral
+        <br><input type="checkbox" name="q16" value="0">Rogue
+        <br><input type="checkbox" name="q16" value="2">Stats
+        <br><input type="checkbox" name="q16" value="0">Maru<br>
+    </p>
+
+    <h1><br>Вопрос №17</h1>
+    <p class="quesсion">
+        <br> Кто на картинке?<br>
+        <img src="https://gadgetsin.com/uploads/2011/05/starcraft_2_terran_race_units_built_with_lego_bricks_1.jpg"><br>
+        <br><input type="checkbox" name="q17" value="0">marine
+        <br><input type="checkbox" name="q17" value="2">thor
+        <br><input type="checkbox" name="q17" value="2">viking
+        <br><input type="checkbox" name="q17" value="0">helbat<br>
+    </p>
+
+    <h1><br>Вопрос №18</h1>
+    <p class="quesсion">
+        <br>Кто из следующих игроков активно ведёт You-tube канал?
+        <br><input type="checkbox" name="q18" value="2">Basset
+        <br><input type="checkbox" name="q18" value="0">Bly
+        <br><input type="checkbox" name="q18" value="0">Exostriker
+        <br><input type="checkbox" name="q18" value="2">SKillous<br>
+    </p>
+
+    <h1><br>Вопрос №19</h1>
+    <p class="quescion">
+        <br> Что необходимо рассе зергов, чтобы исследовать улучшение + 2 на коготь кроме эволюшена и грейда на + 1?
+        <br><input type="checkbox" name="q19" value="2">Минералы и газ
+        <br><input type="checkbox" name="q19" value="0">Hive
+        <br><input type="checkbox" name="q19" value="2">Lair
+        <br><input type="checkbox" name="q19" value="0">бэйнлинги и зерглинги<br>
+    </p>
+
+    <h1><br>Вопрос №20</h1>
+    <p class="quescion">
+        <br> Кто играл в финале Blizzcon 2017?
+        <br><input type="checkbox" name="q20" value="2">Soo
+        <br><input type="checkbox" name="q20" value="2">Rogue
+        <br><input type="checkbox" name="q20" value="0">Serral
+        <br><input type="checkbox" name="q20" value="0">TY<br>
+    </p>
+
+    <p class="price">
+        Вопросы, оцениваемые в 5 баллов
+    </p>
+
+    <h1><br>Вопрос №21</h1>
+    <p class="quescion">
+        <br>Какой самый НЕлюбимый школьный предмет Alex-a 007?
+        <br><input type="radio" name="q21" value="-3">Физика
+        <br><input type="radio" name="q21" value="5">Биология
+        <br><input type="radio" name="q21" value="-3">Химия
+        <br><input type="radio" name="q21" value="-3">Литература<br>
+    </p>
+
+    <h1><br>Вопрос №22</h1>
+    <p class="quescion">
+        <br>В каком году был анонсирован Star Craft II?
+        <br><input type="radio" name="q22" value="-3">1998
+        <br><input type="radio" name="q22" value="-3">2009
+        <br><input type="radio" name="q22" value="5">2008
+        <br><input type="radio" name="q22" value="-3">2010<br>
+    </p>
+
+    <h1><br>Вопрос №23</h1>
+    <p class="quescion">
+        <br>Какая карта - любимая карта Алекса?
+        <br><input type="radio" name="q23" value="5"><img src="https://liquipedia.net/commons/images/thumb/a/a9/Abyssal_Reef_LE.jpg/1007px-Abyssal_Reef_LE.jpg"><br>
+        <br><input type="radio" name="q23" value="-3"><img src="https://liquipedia.net/commons/images/4/42/Daybreak.jpg"><br>
+        <br><input type="radio" name="q23" value="-3"><img src="https://liquipedia.net/commons/images/thumb/5/58/King%27s_Cove_Map.jpg/930px-King%27s_Cove_Map.jpg"><br>
+        <br><input type="radio" name="q23" value="-3"><img src="https://liquipedia.net/commons/images/thumb/f/fe/Odyssey_LE.jpg/876px-Odyssey_LE.jpg"><br>
+    </p>
+
+    <input type="submit" value="Проверить" onclick="check()" id="proverca"><br>
+    <h2 id="ociki"></h2>
+
+
+
+
+</body>
+
+</html>

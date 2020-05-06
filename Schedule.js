@@ -460,13 +460,15 @@ async function showHint4(activate) {
 				c = 0;
 				if(date_count == data.response.data.data.length){
 					writer4[i][0] = data.response.data.data[i].Stat.date;
+					writer4[i][1] = "=SUM(D"+i+",F"+i+",H"+i+",J"+i+",L"+i+",N"+i+",P"+i+",R"+i+",T"+i+",V"+i+")";
+					writer4[i][2] = "=SUM(X"+i+",Z"+i+",AD"+i+",AF"+i+", AH"+i+")";
 				}
 				while(writer4[c][0] != data.response.data.data[i].Stat.date){
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
-					writer4[c][(order+1)*2-1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
-					writer4[c][(order+1)*2] = data.response.data.data[i].Stat.payout;
+					writer4[c][(order+3)*2-1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
+					writer4[c][(order+3)*2] = data.response.data.data[i].Stat.payout;
 					//console.log("c[" + c + "] " + writer4[c][0]+" "+offer_name+" "+writer4[c][(order+1)*2]);
 				}
 			}	
