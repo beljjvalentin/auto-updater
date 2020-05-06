@@ -460,8 +460,8 @@ async function showHint4(activate) {
 				c = 0;
 				if(date_count == data.response.data.data.length){
 					writer4[i][0] = data.response.data.data[i].Stat.date;
-					writer4[i][1] = "=SUM(D"+i+",F"+i+",H"+i+",J"+i+",L"+i+",N"+i+",P"+i+",R"+i+",T"+i+",V"+i+")";
-					writer4[i][2] = "=SUM(X"+i+",Z"+i+",AD"+i+",AF"+i+", AH"+i+")";
+					writer4[i][1] = "=SUM(D"+(i+1)+",F"+(i+1)+",H"+(i+1)+",J"+(i+1)+",L"+(i+1)+",N"+(i+1)+",P"+(i+1)+",R"+(i+1)+",T"+(i+1)+",V"+(i+1)+")";
+					writer4[i][2] = "=SUM(X"+(i+1)+",Z"+(i+1)+",AD"+(i+1)+",AF"+(i+1)+", AH"+(i+1)+")";
 				}
 				while(writer4[c][0] != data.response.data.data[i].Stat.date){
 					c = c + 1;
