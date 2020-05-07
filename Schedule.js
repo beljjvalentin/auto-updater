@@ -467,8 +467,8 @@ async function showHint4(activate) {
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
-					writer4[c][(order+3)*2-1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
-					writer4[c][(order+3)*2] = data.response.data.data[i].Stat.payout;
+					writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
+					writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
 					//console.log("c[" + c + "] " + writer4[c][0]+" "+offer_name+" "+writer4[c][(order+1)*2]);
 				}
 			}	
