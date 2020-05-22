@@ -451,7 +451,7 @@ async function showHint4(activate) {
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 		try{
-		var data = JSON.parse(this.responseText);
+			var data = JSON.parse(this.responseText);
 			if(date_count<data.response.data.data.length)
 				date_count = data.response.data.data.length;
 			//console.log(date_count + " " + data.response.data.data.length);
@@ -475,14 +475,44 @@ async function showHint4(activate) {
 		}catch(e){
 			
 		}
-		if(order == QAoffers.length-1) showHint6(1);
+		if(order == QAoffers.length-1) pushQApnl(); 
 	  }
   };
   if(offer_name == "Medium Amanda") // exclude US, UK, FR which are in different columns
-	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Category.name][conditional]=LIKE&filters[Category.name][values]=Medium+Amanda%&filters[Offer.name][conditional]=NOT_LIKE&filters[Offer.name][values][]=Medium+Amanda+U%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
-  else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
-  console
+	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Category.name][conditional]=LIKE&filters[Category.name][values]=Medium+Amanda%&filters[Offer.name][conditional]=NOT_LIKE&filters[Offer.name][values][]=Medium+Amanda+U%&filters[Stat.offer_id][conditional]=NOT_EQUAL_TO&filters[Stat.offer_id][values]=355&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
+  else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Stat.offer_id][conditional]=NOT_EQUAL_TO&filters[Stat.offer_id][values]=355&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
+  
   setTimeout(xhttp.send(), 100);
+}
+
+function pushQApnl(){
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+		try{
+			var data = JSON.parse(this.responseText);
+			if(date_count<data.response.data.data.length)
+				date_count = data.response.data.data.length;
+			//console.log(date_count);
+			console.log(data.response.data.data.length);
+			console.log(data);
+			var c = 0;
+			for(var i=0; i<data.response.data.data.length; i++){	
+				while(writer4[c][0] != data.response.data.data[i].Stat.date){
+					c = c + 1;
+				} 
+				if(data.response.data.data[i].Stat.conversions > 0){
+					writer4[c][(QAoffers.length+1)*2+1] = data.response.data.data[i].Stat.conversions;
+				}
+			}	
+		}catch(e){
+			
+		}
+		showHint6(1);
+	}
+	};
+	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.offer_id&fields[]=Offer.name&fields[]=Stat.goal_id&fields[]=Goal.name&fields[]=Stat.conversions&filters[Stat.goal_id][conditional]=EQUAL_TO&filters[Stat.goal_id][values]=721&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]=2020-05-01&filters[Stat.date][values][]=2020-05-31&filters[Stat.offer_id][conditional]=EQUAL_TO&filters[Stat.offer_id][values]=355", true);
+	setTimeout(xhttp.send(), 100);
 }
  
 function showHint6(activate) {
