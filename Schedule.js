@@ -226,7 +226,7 @@ function makeApiCallWriteQApnl() {
 			//[ 'date', 'Medium Amanda AUS', 'Medium Amanda BEnl', 'Medium Amanda NL'],
 			writer4[0],	writer4[1],	writer4[2],	writer4[3],	writer4[4],	writer4[5],	writer4[6],	writer4[7],	writer4[8],	writer4[9],	writer4[10], writer4[11], writer4[12], writer4[13],	writer4[14],writer4[15],
 			writer4[16], writer4[17],	writer4[18],	writer4[19],	writer4[20],	writer4[21],	writer4[22],	writer4[23],	writer4[24],	writer4[25],	writer4[26],	writer4[27],	writer4[28],	writer4[29],	writer4[30],
-			writer4[31], writer4[32]
+			writer4[31], writer4[32], , writer4[33]
 		],          
 
 		
