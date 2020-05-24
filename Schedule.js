@@ -503,6 +503,7 @@ function pushQApnl(){
 				} 
 				if(data.response.data.data[i].Stat.conversions > 0){
 					writer4[c][(QAoffers.length+1)*2+1] = data.response.data.data[i].Stat.conversions;
+					writer4[c][(QAoffers.length+1)*2+2] = data.response.data.data[i].Stat.payouts;
 				}
 			}	
 		}catch(e){
@@ -511,7 +512,7 @@ function pushQApnl(){
 		showHint6(1);
 	}
 	};
-	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.offer_id&fields[]=Offer.name&fields[]=Stat.goal_id&fields[]=Goal.name&fields[]=Stat.conversions&filters[Stat.goal_id][conditional]=EQUAL_TO&filters[Stat.goal_id][values]=721&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]=2020-05-01&filters[Stat.date][values][]=2020-05-31&filters[Stat.offer_id][conditional]=EQUAL_TO&filters[Stat.offer_id][values]=355", true);
+	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.offer_id&fields[]=Offer.name&fields[]=Stat.goal_id&fields[]=Goal.name&fields[]=Stat.payout&fields[]=Stat.conversions&filters[Stat.goal_id][conditional]=EQUAL_TO&filters[Stat.goal_id][values]=721&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Stat.offer_id][conditional]=EQUAL_TO&filters[Stat.offer_id][values]=355", true);
 	setTimeout(xhttp.send(), 100);
 }
  
