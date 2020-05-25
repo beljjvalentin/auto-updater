@@ -214,14 +214,14 @@ function makeApiCallWriteQApnl() {
 		spreadsheetId: Schedule_url,
 
         // The A1 notation of the values to update.
-        range: 'QApnl!A2:AO60',  // TODO: Update placeholder value.
+        range: 'QApnl!A2:AQ60',  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       };
 
       var valueRangeBody = {
-		"range": "QApnl!A2:AO60",  //Set this to cell want to add 'x' to.
+		"range": "QApnl!A2:AQ60",  //Set this to cell want to add 'x' to.
 		"majorDimension": "ROWS",
 		"values": [
 			//[ 'date', 'Medium Amanda AUS', 'Medium Amanda BEnl', 'Medium Amanda NL'],
@@ -231,7 +231,7 @@ function makeApiCallWriteQApnl() {
 		// TODO: Add desired properties to the request body. All existing properties
         // will be replaced.
       };
-		
+		console.log(writer4);
       for(var i=0; i<writer4.length; i++){
 		  valueRangeBody.values.push(writer4[i]);
 	  }
