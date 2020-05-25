@@ -9,6 +9,7 @@
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
 					"Medium Amanda", "Medium Amanda UK", "Medium Amanda FR", "Medium Amanda US",
 					"Medium Theresa", "Medium Christina"];
+	var pushQAoffers = ["721", "747", "744"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
 					"Amanda+NL", "Theresa+NL", "Christina+NL", 
@@ -213,26 +214,27 @@ function makeApiCallWriteQApnl() {
 		spreadsheetId: Schedule_url,
 
         // The A1 notation of the values to update.
-        range: 'QApnl!A2:AK60',  // TODO: Update placeholder value.
+        range: 'QApnl!A2:AO60',  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       };
 
       var valueRangeBody = {
-		"range": "QApnl!A2:AK60",  //Set this to cell want to add 'x' to.
+		"range": "QApnl!A2:AO60",  //Set this to cell want to add 'x' to.
 		"majorDimension": "ROWS",
 		"values": [
 			//[ 'date', 'Medium Amanda AUS', 'Medium Amanda BEnl', 'Medium Amanda NL'],
-			writer4[0],	writer4[1],	writer4[2],	writer4[3],	writer4[4],	writer4[5],	writer4[6],	writer4[7],	writer4[8],	writer4[9],	writer4[10], writer4[11], writer4[12], writer4[13],	writer4[14],writer4[15],
-			writer4[16], writer4[17],	writer4[18],	writer4[19],	writer4[20],	writer4[21],	writer4[22],	writer4[23],	writer4[24],	writer4[25],	writer4[26],	writer4[27],	writer4[28],	writer4[29],	writer4[30],
-			writer4[31], writer4[32], , writer4[33]
 		],          
 
 		
 		// TODO: Add desired properties to the request body. All existing properties
         // will be replaced.
       };
+		
+      for(var i=0; i<writer4.length; i++){
+		  valueRangeBody.values.push(writer4[i]);
+	  }
 	
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
@@ -375,6 +377,10 @@ async function showHint4(activate) {
 	for(var offer=0; offer<QAoffers.length; offer++){
 		QApnl(offer, QAoffers[offer]);
 	}
+	await sleep(10000);
+	for(var offer=0; offer<pushQAoffers.length; offer++){
+		pushQApnl(offer, pushQAoffers[offer]);
+	}
 }
  
  function FTdays(order, offer_name){
@@ -475,7 +481,7 @@ async function showHint4(activate) {
 		}catch(e){
 			
 		}
-		if(order == QAoffers.length-1) pushQApnl(); 
+		//if(order == QAoffers.length-1) pushQApnl(); 
 	  }
   };
   if(offer_name == "Medium Amanda") // exclude US, UK, FR which are in different columns
@@ -485,7 +491,7 @@ async function showHint4(activate) {
   setTimeout(xhttp.send(), 100);
 }
 
-function pushQApnl(){
+function pushQApnl(order, goal_id){
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -502,17 +508,17 @@ function pushQApnl(){
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.conversions > 0){
-					writer4[c][(QAoffers.length+1)*2+1] = data.response.data.data[i].Stat.conversions;
-					writer4[c][(QAoffers.length+1)*2+2] = data.response.data.data[i].Stat.payouts;
+					writer4[c][(QAoffers.length+order+1)*2+1] = data.response.data.data[i].Stat.conversions;
+					writer4[c][(QAoffers.length+order+1)*2+2] = data.response.data.data[i].Stat.payouts;
 				}
 			}	
 		}catch(e){
 			
 		}
-		showHint6(1);
+		if(order == pushQAoffers.length-1) showHint6(1);
 	}
 	};
-	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.offer_id&fields[]=Offer.name&fields[]=Stat.goal_id&fields[]=Goal.name&fields[]=Stat.payout&fields[]=Stat.conversions&filters[Stat.goal_id][conditional]=EQUAL_TO&filters[Stat.goal_id][values]=721&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Stat.offer_id][conditional]=EQUAL_TO&filters[Stat.offer_id][values]=355", true);
+	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.offer_id&fields[]=Offer.name&fields[]=Stat.goal_id&fields[]=Goal.name&fields[]=Stat.payout&fields[]=Stat.conversions&filters[Stat.goal_id][conditional]=EQUAL_TO&filters[Stat.goal_id][values]="+goal_id+"&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Stat.offer_id][conditional]=EQUAL_TO&filters[Stat.offer_id][values]=355", true);
 	setTimeout(xhttp.send(), 100);
 }
  
