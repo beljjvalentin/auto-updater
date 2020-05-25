@@ -500,8 +500,8 @@ function pushQApnl(order, goal_id){
 			if(date_count<data.response.data.data.length)
 				date_count = data.response.data.data.length;
 			//console.log(date_count);
-			console.log(data.response.data.data.length);
-			console.log(data);
+			//console.log(data.response.data.data.length);
+			//console.log(data);
 			var c = 0;
 			for(var i=0; i<data.response.data.data.length; i++){	
 				while(writer4[c][0] != data.response.data.data[i].Stat.date){
@@ -509,7 +509,7 @@ function pushQApnl(order, goal_id){
 				} 
 				if(data.response.data.data[i].Stat.conversions > 0){
 					writer4[c][(QAoffers.length+order+1)*2+1] = data.response.data.data[i].Stat.conversions;
-					writer4[c][(QAoffers.length+order+1)*2+2] = data.response.data.data[i].Stat.payouts;
+					writer4[c][(QAoffers.length+order+1)*2+2] = data.response.data.data[i].Stat.payout;
 				}
 			}	
 		}catch(e){
