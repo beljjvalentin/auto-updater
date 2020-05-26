@@ -9,7 +9,7 @@
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
 					"Medium Amanda", "Medium Amanda UK", "Medium Amanda FR", "Medium Amanda US",
 					"Medium Theresa", "Medium Christina"];
-	var pushQAoffers = ["721", "747", "744"];
+	var pushQAoffers = ["721", "747", "744", "750"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
 					"Amanda+NL", "Theresa+NL", "Christina+NL", 
@@ -29,7 +29,6 @@
 	var mm = String(todayDate.getMonth() + 1).padStart(2, '0');
 	var yyyy = todayDate.getFullYear();
 	todayDate = yyyy + '-' + mm + '-' + dd;
-	
 	
 	var sum = 0, i, j, m, l, k, o, p, date_count = 0; 
     function createArray(length) {
@@ -231,7 +230,6 @@ function makeApiCallWriteQApnl() {
 		// TODO: Add desired properties to the request body. All existing properties
         // will be replaced.
       };
-		console.log(writer4);
       for(var i=0; i<writer4.length; i++){
 		  valueRangeBody.values.push(writer4[i]);
 	  }
@@ -460,14 +458,13 @@ async function showHint4(activate) {
 			var data = JSON.parse(this.responseText);
 			if(date_count<data.response.data.data.length)
 				date_count = data.response.data.data.length;
-			//console.log(date_count + " " + data.response.data.data.length);
 			var c = 0;
 			for(var i=0; i<data.response.data.data.length; i++){	
 				c = 0;
 				if(date_count == data.response.data.data.length){
 					writer4[i][0] = data.response.data.data[i].Stat.date;
 					writer4[i][1] = "=SUM(D"+(i+2)+",F"+(i+2)+",H"+(i+2)+",J"+(i+2)+",L"+(i+2)+",N"+(i+2)+",P"+(i+2)+",R"+(i+2)+",T"+(i+2)+",V"+(i+2)+")";
-					writer4[i][2] = "=SUM(X"+(i+2)+",Z"+(i+2)+",AD"+(i+2)+",AF"+(i+2)+", AH"+(i+2)+")";
+					writer4[i][2] = "=SUM(X"+(i+2)+",Z"+(i+2)+",AD"+(i+2)+",AF"+(i+2)+", AH"+(i+2)+",AJ"+(i+2)+",AL"+(i+2)+",AN"+(i+2)+",AP"+(i+2)+")";
 				}
 				while(writer4[c][0] != data.response.data.data[i].Stat.date){
 					c = c + 1;
