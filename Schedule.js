@@ -7,9 +7,9 @@
 	var writer5 = createArray(150, 12);
 	var QAoffers = ["LoveMatch","2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
-					"Medium Amanda", "Medium Amanda UK", "Medium Amanda FR", "Medium Amanda US",
+					"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
 					"Medium Theresa", "Medium Christina"];
-	var pushQAoffers = ["721", "747", "744", "750"];
+	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
 					"Amanda+NL", "Theresa+NL", "Christina+NL", 
@@ -470,25 +470,34 @@ async function showHint4(activate) {
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
-					writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
-					writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
-					//console.log("c[" + c + "] " + writer4[c][0]+" "+offer_name+" "+writer4[c][(order+1)*2]);
+					if(offer_name == "Medium Amanda"){ // exclude US, UK, FR which are in different columns
+						writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
+						writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
+					} else if( offer_name == "Medium Christina" ){
+						writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-AJ"+(i+2);
+						writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AK"+(i+2);
+					} else {
+						writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
+						writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
+					}
 				}
 			}	
 		}catch(e){
 			
 		}
-		//if(order == QAoffers.length-1) pushQApnl(); 
 	  }
   };
-  if(offer_name == "Medium Amanda") // exclude US, UK, FR which are in different columns
-	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Category.name][conditional]=LIKE&filters[Category.name][values]=Medium+Amanda%&filters[Offer.name][conditional]=NOT_LIKE&filters[Offer.name][values][]=Medium+Amanda+U%&filters[Stat.offer_id][conditional]=NOT_EQUAL_TO&filters[Stat.offer_id][values]=355&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
-  else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Stat.offer_id][conditional]=NOT_EQUAL_TO&filters[Stat.offer_id][values]=355&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
-  
-  setTimeout(xhttp.send(), 100);
+	if( offer_name == "Medium Amanda" ) // exclude Push offers which are in different columns
+		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Goal.name][conditional]=LIKE&filters[Goal.name][values]=lead&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Category.name][conditional]=LIKE&filters[Category.name][values]=Medium+Amanda&limit=1000", true);
+	else if( offer_name == "Medium+Amanda+UK" || offer_name == "Medium+Amanda+FR" || offer_name == "Medium+Amanda+US" ){
+		//console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%"+offer_name+"%&limit=1000");
+		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%"+offer_name+"%&limit=1000", true);
+	}
+	else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
+	setTimeout(xhttp.send(), 100);
 }
 
-function pushQApnl(order, goal_id){
+function pushQApnl(order, offer_id){
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -496,17 +505,23 @@ function pushQApnl(order, goal_id){
 			var data = JSON.parse(this.responseText);
 			if(date_count<data.response.data.data.length)
 				date_count = data.response.data.data.length;
-			//console.log(date_count);
-			//console.log(data.response.data.data.length);
-			//console.log(data);
 			var c = 0;
 			for(var i=0; i<data.response.data.data.length; i++){	
-				while(writer4[c][0] != data.response.data.data[i].Stat.date){
-					c = c + 1;
+				for(c = 0; c<31; c++){
+					if(writer4[c][0] == data.response.data.data[i].Stat.date)
+						break;
 				} 
-				if(data.response.data.data[i].Stat.conversions > 0){
-					writer4[c][(QAoffers.length+order+1)*2+1] = data.response.data.data[i].Stat.conversions;
-					writer4[c][(QAoffers.length+order+1)*2+2] = data.response.data.data[i].Stat.payout;
+				if(data.response.data.data[i].Stat.conversions > 0 && data.response.data.data[i].Offer.name.includes( offer_id )){
+					//console.log(writer4[c][0]);
+					//console.log(data.response.data.data[i]);
+					if(writer4[c][(QAoffers.length+order+1)*2+1] == undefined) 
+						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.conversions);
+					else
+						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);
+					if(writer4[c][(QAoffers.length+order+1)*2+2] == undefined) 
+						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(data.response.data.data[i].Stat.payout);
+					else 
+						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
 				}
 			}	
 		}catch(e){
@@ -515,7 +530,7 @@ function pushQApnl(order, goal_id){
 		if(order == pushQAoffers.length-1) showHint6(1);
 	}
 	};
-	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.offer_id&fields[]=Offer.name&fields[]=Stat.goal_id&fields[]=Goal.name&fields[]=Stat.payout&fields[]=Stat.conversions&filters[Stat.goal_id][conditional]=EQUAL_TO&filters[Stat.goal_id][values]="+goal_id+"&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"", true);
+	xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Offer.name&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Goal.name][conditional]=LIKE&filters[Goal.name][values]=LEAD_SOI&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]=2020-05-01&filters[Stat.date][values][]=2020-05-31&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%Push+Flow%&limit=1000", true);
 	setTimeout(xhttp.send(), 100);
 }
  
