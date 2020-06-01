@@ -233,6 +233,7 @@ function makeApiCallWriteQApnl() {
       for(var i=0; i<writer4.length; i++){
 		  valueRangeBody.values.push(writer4[i]);
 	  }
+	  writer4 = createArray(150, 12);
 	
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
