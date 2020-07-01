@@ -1,5 +1,5 @@
 // Global date variables
 var year = 2020;
-var month = 6;
+var month = 7;
 // File urls
-var Schedule_url = "1nokknkmOwM8bdRScb0sz6fS9Wl6CcsVPUCqVdIG2QVw";
+var Schedule_url = "1ojZvuY0jGxw54obgcgq7dLxuvTczD6daleFgtmfnxQ8";
