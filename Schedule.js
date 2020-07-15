@@ -471,15 +471,17 @@ async function showHint4(activate) {
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
-					if(offer_name == "Medium Amanda"){ // exclude US, UK, FR which are in different columns
-						writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
-						writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
-					} else if( offer_name == "Medium Christina" ){
-						writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-AJ"+(i+2);
-						writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AK"+(i+2);
-					} else {
-						writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
-						writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
+					if(!offer_name.includes("Push")){
+						if(offer_name == "Medium Amanda"){ // exclude US, UK, FR which are in different columns
+							writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
+							writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
+						} else if( offer_name == "Medium Christina" ){
+							writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-AJ"+(i+2);
+							writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AK"+(i+2);
+						} else {
+							writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
+							writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
+						}
 					}
 				}
 			}	
