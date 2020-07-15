@@ -471,7 +471,6 @@ async function showHint4(activate) {
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
-					if(!offer_name.includes("Push")){
 						if(offer_name == "Medium Amanda"){ // exclude US, UK, FR which are in different columns
 							writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
 							writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
@@ -482,7 +481,6 @@ async function showHint4(activate) {
 							writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
 							writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
 						}
-					}
 				}
 			}	
 		}catch(e){
@@ -490,11 +488,13 @@ async function showHint4(activate) {
 		}
 	  }
   };
-	if( offer_name == "Medium Amanda" ) // exclude Push offers which are in different columns
+	if( offer_name == "Medium Amanda" ){ // exclude Push offers which are in different columns
 		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Goal.name][conditional]=LIKE&filters[Goal.name][values]=lead&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Category.name][conditional]=LIKE&filters[Category.name][values]=Medium+Amanda&limit=1000", true);
-	else if( offer_name == "Medium+Amanda+UK" || offer_name == "Medium+Amanda+FR" || offer_name == "Medium+Amanda+US" ){
+	} else if( offer_name == "Medium+Amanda+UK" || offer_name == "Medium+Amanda+FR" || offer_name == "Medium+Amanda+US" ){
 		//console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%"+offer_name+"%&limit=1000");
 		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%"+offer_name+"%&limit=1000", true);
+	} else if( offer_name == "LoveMatch" ){
+		else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%new&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
 	}
 	else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
 	setTimeout(xhttp.send(), 100);
