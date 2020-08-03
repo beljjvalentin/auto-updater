@@ -8,7 +8,7 @@
 	var QAoffers = ["LoveMatch","2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
 					"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
-					"Medium Theresa", "Medium Christina", "Medium+Amanda+US+SEO", "Medium Christina NL - SEO"];
+					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];
 	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
