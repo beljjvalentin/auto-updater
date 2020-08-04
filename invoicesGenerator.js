@@ -1,4 +1,4 @@
-	var invoiceGen = createArray(200, 4);
+	var invoiceGen = createArray(400, 4);
 	var page = 1, c=0;
 	var Divinetion = ["LoveMatch", "35plusdate", "SuccesfulDating", "40pluslove"];
 	var Plus5Concepts = ["Amanda", "Theresa", "Christina", "Anja"];
