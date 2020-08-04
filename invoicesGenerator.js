@@ -34,30 +34,28 @@
     }
 	
 	function invoiceGen_makeApiCallWriteAll(month) {
-	  var params = {
-        // The ID of the spreadsheet to update.
-		spreadsheetId: '1keO-hdrOovAZxMtIB6mWOoGerNppkUdS6ko9TojWaKg',
+		var params = {
+			// The ID of the spreadsheet to update.
+			spreadsheetId: '1keO-hdrOovAZxMtIB6mWOoGerNppkUdS6ko9TojWaKg',
 
-        // The A1 notation of the values to update.
-        range: monthName(month)+'!A1:E301',  // TODO: Update placeholder value.
+			// The A1 notation of the values to update.
+			range: monthName(month)+'!A1:E301',  // TODO: Update placeholder value.
 
-        // How the input data should be interpreted.
-        valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
-      };
+			// How the input data should be interpreted.
+			valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
+		};
 
-      var valueRangeBody = {
-		"range": monthName(month)+'!A1:E301',  //Set this to cell want to add 'x' to.
-		"majorDimension": "ROWS",
-		"values": [
+		var valueRangeBody = {
+			"range": monthName(month)+'!A1:E301',  //Set this to cell want to add 'x' to.
+			"majorDimension": "ROWS",
+			"values": [
 			//[monthName(month), 'Divinetion', '', ''],
 			//['offer', 'cost of leads', 'amount of leads', 'total']
-			
-		],          
+			],          
 
-		
-		// TODO: Add desired properties to the request body. All existing properties
-        // will be replaced.
-      };
+			// TODO: Add desired properties to the request body. All existing properties
+			// will be replaced.
+		};
 		var tmp_sum = 0;
 		
 		/*for(var t=0; t<invoiceGen.length; t++)
@@ -153,11 +151,12 @@
 							invoiceGen[c][0] = data.response.data.data[i].Offer.name;					
 							invoiceGen[c][1] = data.response.data.data[i].Stat.payout;
 							invoiceGen[c][2] = 1;
-							c++;
-							i++;
 						} catch(e) {
 						
 						}
+						c++;
+						i++;
+						
 					}					
 				}
 				
