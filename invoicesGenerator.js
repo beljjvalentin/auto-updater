@@ -149,11 +149,15 @@
 						i++;
 						continue;
 					} else {
-						invoiceGen[c][0] = data.response.data.data[i].Offer.name;					
-						invoiceGen[c][1] = data.response.data.data[i].Stat.payout;
-						invoiceGen[c][2] = 1;
-						c++;
-						i++;
+						try {
+							invoiceGen[c][0] = data.response.data.data[i].Offer.name;					
+							invoiceGen[c][1] = data.response.data.data[i].Stat.payout;
+							invoiceGen[c][2] = 1;
+							c++;
+							i++;
+						} catch(e) {
+						
+						}
 					}					
 				}
 				
