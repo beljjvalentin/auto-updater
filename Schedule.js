@@ -9,7 +9,7 @@
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
 					"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
 					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];
-	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", "LoveMatch", "LuckyDating", "PerfectMatch", "40PlusLove"];
+	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", "LoveMatch", "LuckyDating", "PerfectMatch", "40pluslove"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
 					"Amanda+NL", "Theresa+NL", "Christina+NL", 
@@ -213,14 +213,14 @@ function makeApiCallWriteQApnl() {
 		spreadsheetId: Schedule_url,
 
         // The A1 notation of the values to update.
-        range: 'QApnl!A2:BC60',  // TODO: Update placeholder value.
+        range: 'QApnl!A2:BE60',  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       };
 
       var valueRangeBody = {
-		"range": "QApnl!A2:BC60",  //Set this to cell want to add 'x' to.
+		"range": "QApnl!A2:BE60",  //Set this to cell want to add 'x' to.
 		"majorDimension": "ROWS",
 		"values": [
 			//[ 'date', 'Medium Amanda AUS', 'Medium Amanda BEnl', 'Medium Amanda NL'],
