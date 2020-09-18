@@ -9,7 +9,7 @@
 					"Allyoucanlove", "LuckyDating", "HelloDate", "YourLoveMatch",
 					"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
 					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];
-	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", "LoveMatch", "LuckyDating", "PerfectMatch"];
+	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", "LoveMatch", "LuckyDating", "PerfectMatch", "40PlusLove"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
 					"Amanda+NL", "Theresa+NL", "Christina+NL", 
@@ -493,7 +493,7 @@ async function showHint4(activate) {
 	} else if( offer_name == "Medium+Amanda+UK" || offer_name == "Medium+Amanda+FR" || offer_name == "Medium+Amanda+US" ){
 		//console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%"+offer_name+"%&limit=1000");
 		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]="+year+"-"+month+"-01&filters[Stat.date][values][]="+year+"-"+month+"-"+days+"&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%"+offer_name+"%&limit=1000", true);
-	} else if( offer_name == "LoveMatch" || offer_name == "LuckyDating" || offer_name == "PerfectMatch" ){
+	} else if( offer_name == "LoveMatch" || offer_name == "LuckyDating" || offer_name == "PerfectMatch" || offer_name == "40PlusLove"){
 		//console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%new&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days);
 		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%new%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
 	}
