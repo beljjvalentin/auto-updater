@@ -108,7 +108,7 @@
 				document.getElementById('SuperPNL').innerHTML =
 					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
-			if (h == 10 && m == 47 && s == 40 || flag5){ 
+			if (flag5){ 
 				flag5 = false;
 				move_progress("Aff_invoice_pr");
 				counter = parseInt(document.getElementById("skip").value);
@@ -125,7 +125,7 @@
 				document.getElementById('Payout').innerHTML =
 					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
-			if(h == 11 && m%20 == 0 && s == 30 || flag9){
+			if(flag9){
 				flag9 = false;
 				move_progress("Traffic_pr");
 				document.getElementById('Traffic').innerHTML =
