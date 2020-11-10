@@ -464,10 +464,11 @@ async function showHint4(activate) {
 				c = 0;
 				if(date_count == data.response.data.data.length){
 					writer4[i][0] = data.response.data.data[i].Stat.date;
-					writer4[i][1] = "=SUM(D"+(i+2)+",F"+(i+2)+",H"+(i+2)+",J"+(i+2)+",L"+(i+2)+",N"+(i+2)+",P"+(i+2)+",R"+(i+2)+",T"+(i+2)+",V"+(i+2)+")";
+					writer4[i][1] = "=SUM(D"+(i+2)+",F"+(i+2)+",H"+(i+2)+",J"+(i+2)+",L"+(i+2)+",N"+(i+2)+",P"+(i+2)+",R"+(i+2)+",T"+(i+2)+",V"+(i+2)+",AX"+(i+2)+",AZ"+(i+2)+",BB"+(i+2)+",BD"+(i+2)+")";
 					writer4[i][2] = "=SUM(X"+(i+2)+",Z"+(i+2)+",AD"+(i+2)+",AF"+(i+2)+", AH"+(i+2)+",AJ"+(i+2)+",AL"+(i+2)+",AN"+(i+2)+",AP"+(i+2)+")";
 				}
 				while(writer4[c][0] != data.response.data.data[i].Stat.date){
+					
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
