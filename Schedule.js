@@ -6,7 +6,7 @@
 	var writer4 = createArray(150, 12);
 	var writer5 = createArray(150, 12);
 	var QAoffers = ["LoveMatch", "2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
-					"Allyoucanlove", "LuckyDating", "HelloDate", "MagicalMoments",
+					"Allyoucanlove", "LuckyDating", "HelloDate", "Magical+Moments",
 					"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
 					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];
 	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", "LoveMatch", "LuckyDating", "PerfectMatch", "40pluslove"];
@@ -22,7 +22,7 @@
 					"35plusdate+NZ","2020Dating+NZ", "40pluslove+NZ", "allyoucanlove+NZ", "hellodate+NZ", "lovematch+NZ", "luckydating+NZ", "perfectmatch+NZ", "succesfuldating+NZ",
 					"35pluslove+SE", "lovematch+SE",
 					"35plusdate+UK","2020Dating+UK", "40pluslove+UK", "allyoucanlove+UK", "hellodate+UK", "lovematch+UK", "luckydating+UK", "perfectmatch+UK", "succesfuldating+UK",
-					"magicalmoments+AU"];
+					"magical+moments+AU"];
 	
 	var todayDate = new Date();
 	var dd = String(todayDate.getDate()).padStart(2, '0');
