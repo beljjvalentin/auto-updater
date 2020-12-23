@@ -22,7 +22,7 @@
 					"35plusdate+NZ","2020Dating+NZ", "40pluslove+NZ", "allyoucanlove+NZ", "hellodate+NZ", "lovematch+NZ", "luckydating+NZ", "perfectmatch+NZ", "succesfuldating+NZ",
 					"35pluslove+SE", "lovematch+SE",
 					"35plusdate+UK","2020Dating+UK", "40pluslove+UK", "allyoucanlove+UK", "hellodate+UK", "lovematch+UK", "luckydating+UK", "perfectmatch+UK", "succesfuldating+UK",
-					"magical+moments+AU"];
+					"magical+moments"];
 	
 	var todayDate = new Date();
 	var dd = String(todayDate.getDate()).padStart(2, '0');
@@ -498,7 +498,10 @@ async function showHint4(activate) {
 		//console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%new&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days);
 		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%new%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
 	}
-	else xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
+	else {
+		console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days);
+		xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&groups[]=Stat.date&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values]="+offer_name+"%&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
+	}
 	setTimeout(xhttp.send(), 100);
 }
 
