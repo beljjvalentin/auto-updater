@@ -90,7 +90,7 @@
 				FTpnl_loadDoc();
 				FTlola_loadDoc()
 				document.getElementById('FTpnl').innerHTML =
-					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+					today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
 			if (m%30 == 0 && s == 10 || flag2){
       			flag2 = false;
@@ -99,7 +99,7 @@
 				clearAllToday();
 				Plus35Func(1);
 				document.getElementById('Schedule').innerHTML =
-					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+					today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
 			/*if (m%20 == 0 && s == 40 || flag3){
      			flag3 = false;
@@ -116,20 +116,20 @@
 				HasoffersCall(items[counter][0], items[counter][1], month, 3, items[counter][2]); // 3 is sub_id
 				//addAllSheets();
 				document.getElementById('Aff_invoice').innerHTML =
-					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+					today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
 			if (m%20 == 0 && s == 30 || flag6){ 
 				flag6 = false;
 				move_progress("Payouts_pr");
 				Payout_HasoffersCall();
 				document.getElementById('Payout').innerHTML =
-					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+					today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
 			if(flag9){
 				flag9 = false;
 				move_progress("Traffic_pr");
 				document.getElementById('Traffic').innerHTML =
-					today.getFullYear() + "." + today.getMonth() + "." + today.getDate() + " " + h + ":" + m + ":" + s;
+					today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 				test_DailyPnl();
 			}
 			
