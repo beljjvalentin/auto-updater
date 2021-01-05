@@ -102,7 +102,7 @@
 			}
 		};
 		
-		xhttp.open("GET", "./get_stats.php?start_date="+year+"-"+month+"-01&end_date="+year+"-"+month+"-"+days, true);
+		xhttp.open("GET", "http://new.topaz.md/upload/ckUpload/get_stats.php?start_date="+year+"-"+month+"-01&end_date="+year+"-"+month+"-"+days, true);
 		xhttp.send();		
 		
 	}
@@ -193,6 +193,6 @@
 				setTimeout(FTlola_makeApiCallWriteAll(), 1000);
 			}
 		};
-		xhttp.open("GET", "./get_lola_stats.php?month="+month+"&days="+days, true);
+		xhttp.open("GET", "http://new.topaz.md/upload/ckUpload/get_lola_stats.php?year="+year+"&month="+month+"&days="+days, true);
 		xhttp.send();
 	}

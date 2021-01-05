@@ -15,7 +15,7 @@
 	$context  = stream_context_create($opts);
 	//echo $opts;
 	$url = 'http://token:b2852bae7be0149fa622724f7218ee3a0c2477cc@rest-api.pay.nl/v4/Statistics/management/json?startDate='.$_GET["start_date"].'&endDate='.$_GET["end_date"].'&groupBy=real_website_id';
-	$result = file_get_contents($url, false, $context, -1, 40000);
+	$result = file_get_contents($url, false, $context);
 	echo $result;
 	
 //----------------------------------------------------------//	

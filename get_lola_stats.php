@@ -1,7 +1,7 @@
 <?php 
 	header("Access-Control-Allow-Origin: *");
 
-	$url = 'https://lolaleadsmarketing.com/affiliates/api/Reports/CampaignSummary?start_date=2020-'.$_GET['month'].'-01&end_date=2020-'.$_GET['month'].'-'.$_GET['days'].'&conversion_type=all&start_at_row=1&row_limit=30&api_key=m5nEJi5coPsr9aztUl3Jg&affiliate_id=718';
+	$url = 'https://lolaleadsmarketing.com/affiliates/api/Reports/CampaignSummary?start_date='.$_GET['year'].'-'.$_GET['month'].'-01&end_date='.$_GET['year'].'-'.$_GET['month'].'-'.$_GET['days'].'&conversion_type=all&start_at_row=1&row_limit=30&api_key=m5nEJi5coPsr9aztUl3Jg&affiliate_id=718';
 	$result =  file_get_contents($url);
 	echo $result;
 	
