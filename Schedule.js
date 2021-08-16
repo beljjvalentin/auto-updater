@@ -350,7 +350,7 @@ function Plus35AUS(){
 		i++; j++;
 		
 		writer[i] = [,,,'TOTAL traffic expenses','=SUM(C2:C450)'];
-		writer[i+1] = [,,,'TOTAL leads','=SUM(D2:D'+(i-2)+')'];
+		writer[i+1] = [,,,'TOTAL leads','=SUM(D2:D'+(i)+')'];
 		
 		showHint4(1);
 		//Plus35BEnl();
@@ -592,9 +592,10 @@ function TodayPnl(){
     if (this.readyState == 4 && this.status == 200) {
 		var data = JSON.parse(this.responseText);
 		try{
-			var total = data.response.data.data.length;
+			var total = 0;
 			for(var i=0; i<data.response.data.data.length; i++){
 				if(data.response.data.data[i].Stat.conversions!=0){
+					total++;
 					writer2[i][0] = data.response.data.data[i].Offer.name;
 					writer2[i][1] = data.response.data.data[i].Affiliate.company;
 					writer2[i][2] = data.response.data.data[i].Stat.clicks;
@@ -604,7 +605,7 @@ function TodayPnl(){
 				}
 			}
 			writer2.sort(sortFunction);
-			writer2[total+1] = [,,,'TOTAL leads','=SUM(D2:D'+(total-2)+')'];
+			writer2[total+1] = [,,,'TOTAL leads','=SUM(D2:D'+(total-1)+')'];
 		}catch (e){
 			
 		}
