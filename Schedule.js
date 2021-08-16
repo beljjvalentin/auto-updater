@@ -349,7 +349,7 @@ function Plus35AUS(){
 		
 		i++; j++;
 		
-		writer[i] = [,,,'TOTAL traffic expenses','=SUM(C20:C450)'];
+		writer[i] = [,,,'TOTAL traffic expenses','=SUM(C2:C450)'];
 		
 		showHint4(1);
 		//Plus35BEnl();
