@@ -61,7 +61,7 @@
         spreadsheetId: Schedule_url,  // TODO: Update placeholder value.
 
         // The A1 notation of the values to clear.
-        range: 'aPNL!A2:F500',  // TODO: Update placeholder value.
+        range: 'Month Traffic!A2:F500',  // TODO: Update placeholder value.
       };
 
       var clearValuesRequestBody = {
@@ -108,14 +108,14 @@ function makeApiCallWriteAll() {
         spreadsheetId: Schedule_url,
 
         // The A1 notation of the values to update.
-        range: 'aPNL!A2:F500',  // TODO: Update placeholder value.
+        range: 'Month Traffic!A2:F500',  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
       };
 
       var valueRangeBody = {
-		"range": "aPNL!A2:F500",  //Set this to cell want to add 'x' to.
+		"range": "Month Traffic!A2:F500",  //Set this to cell want to add 'x' to.
 		"majorDimension": "ROWS",
 		"values": [
 		],          
@@ -605,8 +605,8 @@ function TodayPnl(){
 		}
 		//document.getElementById("txtHint").innerHTML = //document.getElementById("txtHint").innerHTML + str+'</div></div>';
 		makeApiCallWriteAll();
-		makeApiCallWriteAmandaDays();
-		makeApiCallWriteDatingDays();
+		//makeApiCallWriteAmandaDays();
+		//makeApiCallWriteDatingDays();
 		makeApiCallWriteQApnl();
 		makeApiCallWriteToday();
 		makeApiCallWriteToday();
