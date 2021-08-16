@@ -6,10 +6,11 @@
 	var writer4 = createArray(150, 12);
 	var writer5 = createArray(150, 12);
 	var QAoffers = ["LoveMatch", "2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
-					"Allyoucanlove", "LuckyDating", "HelloDate", "Magical+Moments",
-					"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
-					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];
-	var pushQAoffers = ["Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", "LoveMatch", "LuckyDating", "PerfectMatch", "40pluslove"];
+					"Allyoucanlove", "LuckyDating", "HelloDate", "Magical+Moments"];
+					/*"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
+					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];*/
+	var pushQAoffers = [/*"Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", */
+						"LoveMatch", "LuckyDating", "PerfectMatch", "40pluslove"];
 	var FToffers = ["Amanda+AU", "Theresa+AU", "Christina+AU",
 					"Amanda+BE", "Theresa+BE", "Christina+BE", 
 					"Amanda+NL", "Theresa+NL", "Christina+NL", 
@@ -465,7 +466,7 @@ async function showHint4(activate) {
 				if(date_count == data.response.data.data.length){
 					writer4[i][0] = data.response.data.data[i].Stat.date;
 					writer4[i][1] = "=SUM(D"+(i+2)+",F"+(i+2)+",H"+(i+2)+",J"+(i+2)+",L"+(i+2)+",N"+(i+2)+",P"+(i+2)+",R"+(i+2)+",T"+(i+2)+",V"+(i+2)+",AX"+(i+2)+",AZ"+(i+2)+",BB"+(i+2)+",BD"+(i+2)+")";
-					writer4[i][2] = "=SUM(X"+(i+2)+",Z"+(i+2)+",AD"+(i+2)+",AF"+(i+2)+", AH"+(i+2)+",AJ"+(i+2)+",AL"+(i+2)+",AN"+(i+2)+",AP"+(i+2)+")";
+					//writer4[i][2] = "=SUM(X"+(i+2)+",Z"+(i+2)+",AD"+(i+2)+",AF"+(i+2)+", AH"+(i+2)+",AJ"+(i+2)+",AL"+(i+2)+",AN"+(i+2)+",AP"+(i+2)+")";
 				}
 				while(writer4[c][0] != data.response.data.data[i].Stat.date){
 					
@@ -473,14 +474,14 @@ async function showHint4(activate) {
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
 						if(offer_name == "Medium Amanda"){ // exclude US, UK, FR which are in different columns
-							writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
-							writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
+							writer4[c][(order+1)*2+0] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
+							writer4[c][(order+1)*2+1] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
 						} else if( offer_name == "Medium Christina" ){
-							writer4[c][(order+1)*2+1] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-AJ"+(i+2);
-							writer4[c][(order+1)*2+2] = "="+data.response.data.data[i].Stat.payout+"-AK"+(i+2);
+							writer4[c][(order+1)*2+0] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-AJ"+(i+2);
+							writer4[c][(order+1)*2+1] = "="+data.response.data.data[i].Stat.payout+"-AK"+(i+2);
 						} else {
-							writer4[c][(order+1)*2+1] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
-							writer4[c][(order+1)*2+2] = data.response.data.data[i].Stat.payout;
+							writer4[c][(order+1)*2+0] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
+							writer4[c][(order+1)*2+1] = data.response.data.data[i].Stat.payout;
 						}
 				}
 			}	
