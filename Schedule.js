@@ -5,8 +5,8 @@
 	var writer3 = createArray(150, 12);
 	var writer4 = createArray(150, 12);
 	var writer5 = createArray(150, 12);
-	var QAoffers = ["LoveMatch", "2020Dating", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
-					"Allyoucanlove", "LuckyDating", "HelloDate", "Magical+Moments"];
+	var QAoffers = ["LoveMatch", /*"2020Dating",*/ "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch",
+					/*"Allyoucanlove"*/, "LuckyDating", "HelloDate", /*"Magical+Moments"*/];
 					/*"Medium Amanda", "Medium+Amanda+UK", "Medium+Amanda+FR", "Medium+Amanda+US",
 					"Medium Theresa", "Medium Christina", "Medium Amanda US SEO", "Medium Christina NL - SEO"];*/
 	var pushQAoffers = [/*"Medium Christina NL", "Medium Amanda AU", "Medium Amanda BE", "Medium Amanda SE", "Medium Amanda US", */
@@ -522,10 +522,10 @@ function pushQApnl(order, offer_id){
 						break;
 				} 
 				if(data.response.data.data[i].Stat.conversions > 0 && data.response.data.data[i].Offer.name.includes( offer_id )){
-					if(writer4[c][(QAoffers.length+order+1)*2+1] == undefined) 
-						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.conversions);
+					if(writer4[c][(QAoffers.length+order+1)*2+0] == undefined) 
+						writer4[c][(QAoffers.length+order+1)*2+0] = parseInt(data.response.data.data[i].Stat.conversions);
 					else
-						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);
+						writer4[c][(QAoffers.length+order+1)*2+0] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);
 					/*if(writer4[c][(QAoffers.length+order+1)*2+2] == undefined) 
 						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(data.response.data.data[i].Stat.payout);
 					else 
@@ -559,10 +559,10 @@ function pushQApnl(order, offer_id){
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.conversions);
 					else
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);*/
-					if(writer4[c][(QAoffers.length+order+1)*2+2] == undefined) 
-						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(data.response.data.data[i].Stat.payout);
+					if(writer4[c][(QAoffers.length+order+1)*2+1] == undefined) 
+						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.payout);
 					else 
-						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
+						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
 				}
 			}	
 		}catch(e){
