@@ -356,7 +356,7 @@ function Plus35AUS(){
 	}
   };
   console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.payout&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.payout][conditional]=NOT_EQUAL_TO&filters[Stat.payout][values]=0&sort[Offer.name]=asc&sort[Stat.conversions]=desc&limit=5000&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days);
-  xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.payout&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.payout][conditional]=NOT_EQUAL_TO&filters[Stat.payout][values]=0&sort[Offer.name]=asc&sort[Stat.conversions]=desc&limit=5000&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
+  xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.payout&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Category.id][conditional]=EQUAL_TO&filters[Category.id][values]=1&filters[Stat.payout][conditional]=NOT_EQUAL_TO&filters[Stat.payout][values]=0&sort[Offer.name]=asc&sort[Stat.conversions]=desc&limit=5000&data_start="+year+"-"+month+"-01&data_end="+year+"-"+month+"-"+days, true);
   xhttp.send(); 
 }
 
@@ -615,7 +615,7 @@ function TodayPnl(){
 	}
   };
   //console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Category.name&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.date][conditional]=EQUAL_TO&filters[Stat.date][values]="+todayDate+"&sort[Stat.conversions]=desc");
-  xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Category.name&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.date][conditional]=EQUAL_TO&filters[Stat.date][values]="+todayDate+"&sort[Stat.conversions]=desc", true);
+  xhttp.open("GET", "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Category.name&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.date][conditional]=EQUAL_TO&filters[Stat.date][values]="+todayDate+"&filters[Category.id][conditional]=EQUAL_TO&filters[Category.id][values]=1&sort[Stat.conversions]=desc", true);
   setTimeout(xhttp.send(), 100);
   
 }
