@@ -605,7 +605,7 @@ function TodayPnl(){
 				}
 			}
 			writer2.sort(sortFunction);
-			writer2[total+1] = [,,,'TOTAL leads','=SUM(D2:D'+(total+1)+')'];
+			writer2[total+1] = [,,,'TOTAL leads','=SUM(D2:D'+(total+3)+')'];
 		}catch (e){
 			
 		}
