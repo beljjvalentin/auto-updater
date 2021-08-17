@@ -367,18 +367,18 @@ async function showHint4(activate) {
 		//document.getElementById("txtHint").innerHTML = "";
 		return;
 	}
-	for(var offer=0; offer<FToffers.length; offer++){
+	/*for(var offer=0; offer<FToffers.length; offer++){
 		FTdays(offer, FToffers[offer]);
 	}
 	await sleep(10000);
 	for(var offer=0; offer<DToffers.length; offer++){
 		DTdays(offer, DToffers[offer]);
 	}
-	await sleep(10000);
+	await sleep(10000);*/
 	for(var offer=0; offer<QAoffers.length; offer++){
 		QApnl(offer, QAoffers[offer]);
 	}
-	await sleep(10000);
+	await sleep(1000);
 	for(var offer=0; offer<pushQAoffers.length; offer++){
 		pushQApnl(offer, pushQAoffers[offer]);
 	}
@@ -523,10 +523,10 @@ function pushQApnl(order, offer_id){
 						break;
 				} 
 				if(data.response.data.data[i].Stat.conversions > 0 && data.response.data.data[i].Offer.name.includes( offer_id )){
-					if(writer4[c][(QAoffers.length+order+1)*2+0] == undefined) 
-						writer4[c][(QAoffers.length+order+1)*2+0] = parseInt(data.response.data.data[i].Stat.conversions);
+					if(writer4[c][(QAoffers.length+order)*2+0] == undefined) 
+						writer4[c][(QAoffers.length+order)*2+0] = parseInt(data.response.data.data[i].Stat.conversions);
 					else
-						writer4[c][(QAoffers.length+order+1)*2+0] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);
+						writer4[c][(QAoffers.length+order)*2+0] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);
 					/*if(writer4[c][(QAoffers.length+order+1)*2+2] == undefined) 
 						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(data.response.data.data[i].Stat.payout);
 					else 
@@ -560,10 +560,10 @@ function pushQApnl(order, offer_id){
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.conversions);
 					else
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);*/
-					if(writer4[c][(QAoffers.length+order+1)*2+1] == undefined) 
-						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.payout);
+					if(writer4[c][(QAoffers.length+order+1)*2] == undefined) 
+						writer4[c][(QAoffers.length+order+1)*2] = parseInt(data.response.data.data[i].Stat.payout);
 					else 
-						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
+						writer4[c][(QAoffers.length+order+1)*2] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
 				}
 			}	
 		}catch(e){
@@ -615,7 +615,7 @@ function TodayPnl(){
 		//makeApiCallWriteDatingDays();
 		makeApiCallWriteQApnl();
 		makeApiCallWriteToday();
-		makeApiCallWriteToday();
+		
 	}
   };
   //console.log("https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Category.name&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.date][conditional]=EQUAL_TO&filters[Stat.date][values]="+todayDate+"&sort[Stat.conversions]=desc");
