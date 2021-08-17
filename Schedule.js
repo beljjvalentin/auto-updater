@@ -560,10 +560,10 @@ function pushQApnl(order, offer_id){
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.conversions);
 					else
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);*/
-					if(writer4[c][(QAoffers.length+order+1)*2] == undefined) 
-						writer4[c][(QAoffers.length+order+1)*2] = parseInt(data.response.data.data[i].Stat.payout);
+					if(writer4[c][(QAoffers.length+order)*2+1] == undefined) 
+						writer4[c][(QAoffers.length+order)*2+1] = parseInt(data.response.data.data[i].Stat.payout);
 					else 
-						writer4[c][(QAoffers.length+order+1)*2] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
+						writer4[c][(QAoffers.length+order)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
 				}
 			}	
 		}catch(e){
