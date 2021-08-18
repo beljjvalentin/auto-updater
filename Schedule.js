@@ -585,7 +585,7 @@ function showHint6(activate) {
   TodayPnl();
  }
 
-async function TodayPnl(){ 
+function TodayPnl(){ 
      // Today pnl request
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -604,9 +604,7 @@ async function TodayPnl(){
 					writer2[i][5] = data.response.data.data[i].Category.name;
 				}
 			}
-			await sleep(500);
 			writer2.sort(sortFunction);
-			await sleep(500);
 			writer2[total+1] = [,,,'TOTAL leads','=SUM(D2:D'+(total+3)+')'];
 		}catch (e){
 			
