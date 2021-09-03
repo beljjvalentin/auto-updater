@@ -200,7 +200,14 @@
 	</script>
 </head>
 <body onload="startTime()">
-	Current time: <div id="txt"></div></br>
+	<table><tr>
+		<td style="width: 200px;">Current time: <div id="txt"></div></br></td>
+		<td style="width: 200px;">Current settings: </br>
+								Year:  <div id="year"></div>
+								Month: <div id="month"></div>
+								File:  <div id="file"></div>
+		</td>
+	</tr></table>
 	<table border="1px">
 		<thead>
 			<tr>
@@ -243,5 +250,10 @@
 	For month: <input type="number" value="" id="invoices_month" style="width: 50px;"></input> and year <input type="number" value="" id="invoices_year" style="width: 50px;"></input></br>
 	<!--<button id="test8" onclick="test_loadDoc9()">Test Daily Traffic</button><input style="display:none;" type="date" id="myDate" value=""><br>-->
 	<a href="./next_month_form.html">Settings</a>
+	<script>
+		document.getElementById("year").value = year;
+		document.getElementById("month").value = month;
+		document.getElementById("file").value = Schedule_url;
+	</script>
 </body>
 </html>
