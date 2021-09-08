@@ -453,6 +453,7 @@ async function showHint4(activate) {
  }
  
  function QApnl(order, offer_name){ 
+	console.log(order + " - " + offer_id);
      //QApnl request
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -475,6 +476,7 @@ async function showHint4(activate) {
 					c = c + 1;
 				} 
 				if(data.response.data.data[i].Stat.payout > 0){
+						console.log(data.response.data.data[i].Stat.conversions);
 						if(offer_name == "Medium Amanda"){ // exclude US, UK, FR which are in different columns
 							writer4[c][(order+1)*2+0] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-Z"+(i+2)+"-AB"+(i+2)+"-AD"+(i+2);
 							writer4[c][(order+1)*2+1] = "="+data.response.data.data[i].Stat.payout+"-AA"+(i+2)+"-AC"+(i+2)+"-AE"+(i+2);
