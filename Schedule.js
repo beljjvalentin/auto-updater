@@ -509,6 +509,7 @@ async function showHint4(activate) {
 }
 
 function pushQApnl(order, offer_id){
+	console.log(order + " - " + offer_id);
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -523,11 +524,12 @@ function pushQApnl(order, offer_id){
 						break;
 				} 
 				if(data.response.data.data[i].Stat.conversions > 0 && data.response.data.data[i].Offer.name.includes( offer_id )){
-					if(writer4[c][(QAoffers.length+order)*2+0] == undefined) 
+					console.log(data.response.data.data[i].Stat.conversions);
+					if(writer4[c][(QAoffers.length+order)*2+0] == undefined){
 						writer4[c][(QAoffers.length+order)*2+0] = parseInt(data.response.data.data[i].Stat.conversions);
-					else
+					} else { 
 						writer4[c][(QAoffers.length+order)*2+0] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);
-					/*if(writer4[c][(QAoffers.length+order+1)*2+2] == undefined) 
+					}/*if(writer4[c][(QAoffers.length+order+1)*2+2] == undefined) 
 						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(data.response.data.data[i].Stat.payout);
 					else 
 						writer4[c][(QAoffers.length+order+1)*2+2] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);*/
@@ -560,10 +562,12 @@ function pushQApnl(order, offer_id){
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(data.response.data.data[i].Stat.conversions);
 					else
 						writer4[c][(QAoffers.length+order+1)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+1]) + parseInt(data.response.data.data[i].Stat.conversions);*/
-					if(writer4[c][(QAoffers.length+order)*2+1] == undefined) 
+					console.log(data.response.data.data[i].Stat.conversions);
+					if(writer4[c][(QAoffers.length+order)*2+1] == undefined) {
 						writer4[c][(QAoffers.length+order)*2+1] = parseInt(data.response.data.data[i].Stat.payout);
-					else 
+					} else { 
 						writer4[c][(QAoffers.length+order)*2+1] = parseInt(writer4[c][(QAoffers.length+order+1)*2+2]) + parseInt(data.response.data.data[i].Stat.payout);
+					}
 				}
 			}	
 		}catch(e){
