@@ -453,7 +453,7 @@ async function showHint4(activate) {
  }
  
  function QApnl(order, offer_name){ 
-	console.log(order + " - " + offer_id);
+	console.log(order + " - " + offer_name);
      //QApnl request
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
