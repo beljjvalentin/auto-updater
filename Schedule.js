@@ -353,7 +353,7 @@ function Plus35AUS(){
 		i++; j++;
 		
 		writer[i] = [,,,'TOTAL traffic expenses','=SUM(C2:C450)'];
-		writer[i+1] = [,,,'TOTAL leads','=SUM(D2:D'+(i)+')'];
+		writer[i+1] = [,,,'TOTAL leads','=SUM(E2:E'+(i)+')'];
 		
 		showHint4(1);
 		//Plus35BEnl();
