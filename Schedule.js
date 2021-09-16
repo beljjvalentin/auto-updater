@@ -352,8 +352,8 @@ function Plus35AUS(){
 		
 		i++; j++;
 		
-		writer[i] = [,,,'TOTAL traffic expenses','=SUM(C2:C450)'];
-		writer[i+1] = [,,,'TOTAL leads','=SUM(E2:E'+(i)+')'];
+		writer[i] = [,,,,'TOTAL traffic expenses','=SUM(C2:C450)'];
+		writer[i+1] = [,,,,'TOTAL leads','=SUM(E2:E'+(i)+')'];
 		
 		showHint4(1);
 		//Plus35BEnl();
@@ -456,7 +456,7 @@ async function showHint4(activate) {
  }
  
  function QApnl(order, offer_name){ 
-	console.log(order + " - " + offer_name);
+	//console.log(order + " - " + offer_name);
      //QApnl request
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -487,7 +487,7 @@ async function showHint4(activate) {
 							writer4[c][(order+1)*2+0] = "="+(data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10))+"-AJ"+(i+2);
 							writer4[c][(order+1)*2+1] = "="+data.response.data.data[i].Stat.payout+"-AK"+(i+2);
 						} else {
-							console.log(order + " " + data.response.data.data[i].Stat.conversions);
+							//console.log(order + " " + data.response.data.data[i].Stat.conversions);
 							writer4[c][(order+1)*2+0] = (data.response.data.data[i].Stat.conversions - (data.response.data.data[i].Stat.revenue / 10));
 							writer4[c][(order+1)*2+1] = data.response.data.data[i].Stat.payout;
 						}
