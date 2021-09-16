@@ -127,6 +127,8 @@ function makeApiCallWriteAll() {
 	  for(var i=0; i<writer.length; i++)
 		  valueRangeBody.values.push(writer[i]);
 	  
+	  writer = createArray(250, 6);
+	  
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
@@ -324,9 +326,10 @@ function Plus35AUS(){
 				}
 				writer[i][1] = data.response.data.data[j].Affiliate.company;
 				writer[i][2] = data.response.data.data[j].Stat.payout;
-				writer[i][3] = (data.response.data.data[j].Stat.conversions - (data.response.data.data[j].Stat.revenue / 10));
-				writer[i][4] = (data.response.data.data[j].Stat.revenue / 10);
-				writer[i][5] = writer[i][4]/writer[i][3];
+				writer[i][3] = data.response.data.data[j].Stat.clicks;
+				writer[i][4] = (data.response.data.data[j].Stat.conversions - (data.response.data.data[j].Stat.revenue / 10));
+				writer[i][5] = (data.response.data.data[j].Stat.revenue / 10);
+				writer[i][6] = writer[i][4]/writer[i][3];
 				//console.log("I"+i+":"+writer[i]);
 			} catch (e){
 			
