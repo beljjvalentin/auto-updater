@@ -276,7 +276,7 @@ function makeApiCallWriteToday() {
 		  valueRangeBody.values.push(writer2[i]);
 	  }
 	  writer2 = createArray(80, 6);
-	  console.log(writer2);
+	  console.log(valueRangeBody.values);
 	  
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
