@@ -271,10 +271,12 @@ function makeApiCallWriteToday() {
         // will be replaced.
       };
 	  
+	  console.log(writer2);
 	  for(var i=0; i<writer2.length; i++){
 		  valueRangeBody.values.push(writer2[i]);
 	  }
 	  writer2 = createArray(80, 6);
+	  console.log(writer2);
 	  
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
@@ -331,7 +333,7 @@ function Plus35AUS(){
 				writer[i][4] = (data.response.data.data[j].Stat.conversions - (data.response.data.data[j].Stat.revenue / 10));
 				writer[i][5] = (data.response.data.data[j].Stat.revenue / 10);
 				writer[i][6] = writer[i][4]/writer[i][3];
-				console.log("I"+i+":"+writer[i]);
+				//console.log("I"+i+":"+writer[i]);
 			} catch (e){
 			
 			}
@@ -617,7 +619,6 @@ function TodayPnl(){
 			}
 			//writer2.sort(sortFunction);
 			writer2[total+1] = [,,,'TOTAL leads','=SUM(D2:D'+(total+2)+')'];
-			console.log(writer2);
 		}catch (e){
 			
 		}
