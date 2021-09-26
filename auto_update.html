@@ -92,7 +92,7 @@
 				document.getElementById('FTpnl').innerHTML =
 					today.getFullYear() + "." + (today.getMonth()+1) + "." + today.getDate() + " " + h + ":" + m + ":" + s;
 			}
-			if (m%15 == 0 && s == 10 || flag2){
+			if (m%30 == 0 && s == 10 || flag2){
       			flag2 = false;
 				move_progress("Schedule_pr");
 				clearAll();
