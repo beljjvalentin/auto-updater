@@ -1,6 +1,7 @@
 <?php
 
-require 'C:/OpenServer/modules/php/PHP_7.2/vendor/autoload.php';
+//require 'C:/OpenServer/modules/php/PHP_7.2/vendor/autoload.php';
+require '/usr/share/php/vendor/autoload.php';
 
 if (php_sapi_name() != 'cli') {
     throw new Exception('This application must be run on the command line.');
@@ -17,7 +18,7 @@ function getClient()
     $client->setScopes(Google_Service_Sheets::SPREADSHEETS);
 	
 	//$client->setAuthConfig('credentials.json');
-    $client->setAuthConfig('C:/OpenServer/domains/auto-updater/credentials.json');
+    $client->setAuthConfig('/var/webmin/credentials.json');
     //var_dump($client);
 	$client->setAccessType('offline');
     $client->setPrompt('select_account consent');
@@ -26,7 +27,7 @@ function getClient()
     // The file token.json stores the user's access and refresh tokens, and is
     // created automatically when the authorization flow completes for the first
     // time.
-    $tokenPath = 'token.json';
+    $tokenPath = '/var/webmin/token.json';
     if (file_exists($tokenPath)) {
         $accessToken = json_decode(file_get_contents($tokenPath), true);
         $client->setAccessToken($accessToken);
@@ -89,6 +90,18 @@ function getClient()
         return $result;
     }*/
 
+/* ---------------------------------------------------- 
+
+	########  #######  ########     ###    ##    ## 
+	   ##    ##     ## ##     ##   ## ##    ##  ##  
+	   ##    ##     ## ##     ##  ##   ##    ####   
+	   ##    ##     ## ##     ## ##     ##    ##   
+	   ##    ##     ## ##     ## #########    ##   
+	   ##    ##     ## ##     ## ##     ##    ##   
+	   ##     #######  ########  ##     ##    ##   
+   
+   ---------------------------------------------------- */
+
 // Get the API client and construct the service object.
 $client = getClient();
 $service = new Google_Service_Sheets($client);
@@ -96,7 +109,7 @@ $service = new Google_Service_Sheets($client);
 // Prints the names and majors of students in a sample spreadsheet:
 // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
 //$spreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
-$spreadsheetId = '1dzDH1IgqUTNHjrOyMsKAk3cGeu5pmx0balLtVtESPoU';
+$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
 $range = 'Today Traffic!A1:F';
 $response = $service->spreadsheets_values->get($spreadsheetId, $range);
 $values = $response->getValues();
@@ -104,11 +117,11 @@ $values = $response->getValues();
 if (empty($values)) {
     print "No data found.\n";
 } else {
-    print "Name, Major:\n";
+    /*print "Name, Major:\n";
     foreach ($values as $row) {
         // Print columns A and E, which correspond to indices 0 and 4.
         printf("%s, %s\n", $row[0], $row[4]);
-    }
+    }*/
 }
 
 //  Initiate curl
@@ -173,11 +186,101 @@ $result = $service->spreadsheets_values->update($spreadsheetId, $range,
 $body, $params);
 printf("%d cells updated.\n", $result->getUpdatedCells());
 
-// -------------------------------------------------------
+/* --------------------------------------------------------------------------------------
 
-// -------------------------------------------------------
+	##    ## ########  ######  ######## ######## ########  ########     ###    ##    ## 
+	 ##  ##  ##       ##    ##    ##    ##       ##     ## ##     ##   ## ##    ##  ##  
+	  ####   ##       ##          ##    ##       ##     ## ##     ##  ##   ##    ####   
+	   ##    ######    ######     ##    ######   ########  ##     ## ##     ##    ##    
+	   ##    ##             ##    ##    ##       ##   ##   ##     ## #########    ##    
+	   ##    ##       ##    ##    ##    ##       ##    ##  ##     ## ##     ##    ##    
+	   ##    ########  ######     ##    ######## ##     ## ########  ##     ##    ##   
+   
+   --------------------------------------------------------------------------------------  */
 
-$spreadsheetId = '1dzDH1IgqUTNHjrOyMsKAk3cGeu5pmx0balLtVtESPoU';
+// Get the API client and construct the service object.
+$client = getClient();
+$service = new Google_Service_Sheets($client);
+
+// Prints the names and majors of students in a sample spreadsheet:
+// https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+//$spreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
+$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+$range = 'Yesterday Traffic!A1:F';
+$response = $service->spreadsheets_values->get($spreadsheetId, $range);
+$values = $response->getValues();
+
+if (empty($values)) {
+    print "No data found.\n";
+} else {
+}
+
+//  Initiate curl
+$ch = curl_init();
+$date = date('Y-m-d', strtotime('-1 days'));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_URL, "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Category.name&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Stat.date][conditional]=EQUAL_TO&filters[Stat.date][values]=".$date."&filters[Category.id][conditional]=EQUAL_TO&filters[Category.id][values]=1&sort[Stat.conversions]=desc");
+$result=curl_exec($ch);
+curl_close($ch);
+
+// Will dump a beauty json :3
+$dataArray = (array) json_decode($result, true);
+$writeArray = [];
+
+array_push($writeArray, ['Traffic for Yesterday', $date, '', '']);
+array_push($writeArray, ['offer', 'affiliate', 'clicks', 'leads', 'sales']);
+
+$total = 0;
+foreach($dataArray["response"]["data"]["data"] as $key => $value){
+	
+	if($dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] !=0 ){
+		$total++;
+		$offerName = $dataArray["response"]["data"]["data"][$key]["Offer"]["name"];
+		$affiliateCompany = $dataArray["response"]["data"]["data"][$key]["Affiliate"]["company"];
+		$statClicks = $dataArray["response"]["data"]["data"][$key]["Stat"]["clicks"];
+		$statLeads = (int)((int)$dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10));
+		$statSales = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10);
+		$categoryName = $dataArray["response"]["data"]["data"][$key]["Category"]["name"];
+		array_push($writeArray, [$offerName, $affiliateCompany, $statClicks, $statLeads, $statSales, $categoryName]);
+	}
+}
+array_push($writeArray, ['','','','','']);
+array_push($writeArray, ['','','','TOTAL leads','=SUM(D2:D'.(string)((int)$total+2).')']);
+
+// Clear values to Schedule js
+// TODO: Assign values to desired properties of `requestBody`:
+$requestBody = new Google_Service_Sheets_ClearValuesRequest();
+
+$response = $service->spreadsheets_values->clear($spreadsheetId, $range, $requestBody);
+
+// TODO: Change code below to process the `response` object:
+//echo '<pre>', var_export($response, true), '</pre>', "\n";
+
+// Write values to Schedule js
+$values = $writeArray;
+$body = new Google_Service_Sheets_ValueRange([
+    'values' => $values
+]);
+$params = [
+    'valueInputOption' => 'USER_ENTERED'
+];
+$result = $service->spreadsheets_values->update($spreadsheetId, $range,
+$body, $params);
+printf("%d cells updated.\n", $result->getUpdatedCells());
+
+/*  ----------------------------------------------------
+
+	##     ##  #######  ##    ## ######## ##     ## 
+	###   ### ##     ## ###   ##    ##    ##     ## 
+	#### #### ##     ## ####  ##    ##    ##     ## 
+	## ### ## ##     ## ## ## ##    ##    ######### 
+	##     ## ##     ## ##  ####    ##    ##     ## 
+	##     ## ##     ## ##   ###    ##    ##     ## 
+	##     ##  #######  ##    ##    ##    ##     ## 
+
+    ----------------------------------------------------  */
+
+$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
 $range = 'Month Traffic!A1:H';
 
 $ch = curl_init();
@@ -223,7 +326,7 @@ foreach($dataArray["response"]["data"]["data"] as $key => $value){
 		$statClicks = (int) $dataArray["response"]["data"]["data"][$key]["Stat"]["clicks"];
 		$statLeads = (int)((int)$dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10));
 		$statSales = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10);
-		$categoryName = $dataArray["response"]["data"]["data"][$key]["Category"]["name"];
+		//$categoryName = $dataArray["response"]["data"]["data"][$key]["Category"]["name"];
 		$statRatio = $statLeads / $statClicks;
 		array_push($writeArray, [$offerGeo, $offerName, $affiliateCompany, $statPayout, $statClicks, $statLeads, $statSales, $statRatio]);
 	}
@@ -267,18 +370,30 @@ printf("%d cells updated.\n", $result->getUpdatedCells());
 $QAoffers = ["LoveMatch", "35PlusDate", "SuccesfulDating", "40PlusLove", "PerfectMatch", "LuckyDating", "HelloDate"];
 $pushQAoffers = ["LoveMatch", "LuckyDating", "PerfectMatch", "40pluslove"];
 
+$writeArray = [];
 
-foreach($QAoffers as $key => $value){
-	QApnl($key, $values, $service);
+$year = date('Y');
+$month = date('m');
+$last_date = date("t");
+
+for($i = 1; $i < $last_date; $i++){
+	$date_format = new DateTime($year."-".$month."-".$i);
+	$write_date = $date_format->format("Y-m-d");
+	$code = "=SUM(C".($i+1).",E".($i+1).",G".($i+1).",I".($i+1).",K".($i+1).",M".($i+1).",O".($i+1).",Q".($i+1).",S".($i+1).",U".($i+1).",W".($i+1).")";
+	array_push($writeArray, [ $write_date, $code, '', '', '', '', '', '', '', '', '', '', '', '']);
 }
-/*foreach($pushQAoffers as $key => $value){
-	pushQApnl($key, $values);
-}*/
 
-
+foreach($QAoffers as $key2 => $value2){
+	QApnl($key2, $value2, $service);
+}
+$writeArray = [];
+foreach($pushQAoffers as $key2 => $value2){
+	pushQApnl($key2, $value2, $service);
+}
 
 function QApnl($order, $offer_name, $service) {
-	
+	global $writeArray;
+	//print_r($order.": ".$offer_name."\n");
 	$first_date = date('Y-m-01');
 	$last_date = date('Y-m-t');
 	
@@ -293,7 +408,6 @@ function QApnl($order, $offer_name, $service) {
 	}
 
 	$ch = curl_init();
-	
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_URL, $url);
 	$result=curl_exec($ch);
@@ -301,68 +415,120 @@ function QApnl($order, $offer_name, $service) {
 
 	// Will dump a beauty json :3
 	$dataArray = (array) json_decode($result, true);
-	$writeArray = [];
 	
 	$c = 0;
 	$total = 0;
-	$date_count = count($dataArray["response"]["data"]["data"]);
+	$date_count = count($dataArray["response"]["data"]["data"])-1;
+	
 	foreach($dataArray["response"]["data"]["data"] as $key => $value){
-		$c = 0;
-		if($date_count == $key){
-			$writeArray[$key][0] = $dataArray["response"]["data"]["data"][$key]["Stat"]["date"];
-			$writeArray[$key][1] = "=SUM(C".($key+2).",E".($key+2).",G".($key+2).",I".($key+2).",K".($key+2).",M".($key+2).",O".($key+2).",Q".($key+2).",S".($key+2).",U".($key+2).",W".($key+2).")";
-		}
-		while(writeArray[$c][0] != $dataArray["response"]["data"]["data"][$key]["Stat"]["date"]){		
-			$c = $c + 1;
-		} 
-		if($dataArray["response"]["data"]["data"][$key]["Stat"]["payout"] !=0 ){
-			$total++;
-			if( $offer_name == "Medium Amanda" ){ // exclude US, UK, FR which are in different columns
-				$writeArray[$c][($order+1)*2+0] = "=".($dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - ($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10))."-Z".($key+2)."-AB".($key+2)."-AD".($key+2);
-				$writeArray[$c][($order+1)*2+1] = "=".$dataArray["response"]["data"]["data"][$key]["Stat"]["payout"]."-AA".($key+2)."-AC".($key+2)."-AE".($key+2);
-			} else if( $offer_name == "Medium Christina" ){
-				$writeArray[$c][($order+1)*2+0] = "=".($dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - ($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10))."-AJ".($key+2);
-				$writeArray[$c][($order+1)*2+1] = "=".$dataArray["response"]["data"]["data"][$key]["Stat"]["payout"]."-AK".($key+2);
-			} else {
-				var_dump($writeArray);
-				$writeArray[$c][($order+1)*2+0] = ($dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - ($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10));
-				$writeArray[$c][($order+1)*2+1] = $dataArray["response"]["data"]["data"][$key]["Stat"]["payout"];
+		$c = 0; $date_exists = false;
+		$date = $dataArray["response"]["data"]["data"][$key]["Stat"]["date"];
+		$statLeads = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - (int)((int)$dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10));
+		$statPayout = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["payout"]);
+		
+		foreach($writeArray as $key3 => $value3){	
+			if($date == $writeArray[$key3][0] && $statLeads != 0 && $statPayout != 0){
+				//print_r("Order: ".$order." - ".$date ."==". $writeArray[$key3][0]."\n");
+				$index1 = ($order+1)*2+0;
+				$index2 = ($order+1)*2+1;
+				$writeArray[$key3][$index1] = "".strval($statLeads);
+				$writeArray[$key3][$index2] = "".strval($statPayout);
+				//$writeArray[$key3][$index1] = 8;
+				//$writeArray[$key3][$index2] = "8";
+				//print_r("writeArray[".$key3."][".$index1."]=".strval($statLeads)."(".$writeArray[$key3][$index1].")\n");
 			}
-						
-			/*$offerName = $dataArray["response"]["data"]["data"][$key]["Offer"]["name"];
-			$affiliateCompany = $dataArray["response"]["data"]["data"][$key]["Affiliate"]["company"];
-			$statClicks = $dataArray["response"]["data"]["data"][$key]["Stat"]["clicks"];
-			$statLeads = (int)((int)$dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10));
-			$statSales = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10);
-			$categoryName = $dataArray["response"]["data"]["data"][$key]["Category"]["name"];*/
-			
-			//array_push($writeArray, [$offerName, $affiliateCompany, $statClicks, $statLeads, $statSales, $categoryName]);
 		}
 	}
-	if($order == 6)
-		writeQApnl($writeArray, $service);
+	
+	if($order == 6){
+		//var_dump($writeArray[1]);
+		$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+		$range = 'QApnl!A2:X32';
+
+		$requestBody = new Google_Service_Sheets_ClearValuesRequest();
+		$response = $service->spreadsheets_values->clear($spreadsheetId, $range, $requestBody);
+		
+		$range = 'QApnl!A2:X';
+		//print_r("Write QA pnl\n");
+		// Write values to Schedule js
+		$values = $writeArray;
+		$body = new Google_Service_Sheets_ValueRange([
+			'values' => $values
+		]);
+		$params = [
+			'valueInputOption' => 'USER_ENTERED'
+		];
+		$result = $service->spreadsheets_values->update($spreadsheetId, $range,
+			$body, $params);
+		printf("%d cells updated.\n", $result->getUpdatedCells());
+	}
+	//	writeQApnl($writeArray, $service);
 }
 
-function writeQApnl($writeArray, $service){
-	var_dump($writeArray);
-	$spreadsheetId = '1dzDH1IgqUTNHjrOyMsKAk3cGeu5pmx0balLtVtESPoU';
-	$range = 'QApnl!C3:Z';
-
-	$requestBody = new Google_Service_Sheets_ClearValuesRequest();
-	$response = $service->spreadsheets_values->clear($spreadsheetId, $range, $requestBody);
+function pushQApnl($order, $offer_name, $service) {
+	global $writeArray;
+	//print_r($order.": ".$offer_name."\n");
+	$first_date = date('Y-m-01');
+	$last_date = date('Y-m-t');
 	
-	print_r("Write QA pnl\n");
-	// Write values to Schedule js
-	$values = $writeArray;
-	$body = new Google_Service_Sheets_ValueRange([
-		'values' => $values
-	]);
-	$params = [
-		'valueInputOption' => 'USER_ENTERED'
-	];
-	$result = $service->spreadsheets_values->update($spreadsheetId, $range,
-	$body, $params);
-	printf("%d cells updated.\n", $result->getUpdatedCells());
+	$url ="https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Offer.name&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Goal.name][conditional]=LIKE&filters[Goal.name][values]=lead&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]=".$first_date."&filters[Stat.date][values][]=".$last_date."&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%Push+Flow%&limit=1000";
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_URL, $url);
+	$result=curl_exec($ch);
+	curl_close($ch);
+
+	// Will dump a beauty json :3
+	$dataArray = (array) json_decode($result, true);
+	
+	$c = 0;
+	$total = 0;
+	$date_count = count($dataArray["response"]["data"]["data"])-1;
+	
+	foreach($dataArray["response"]["data"]["data"] as $key => $value){
+		$c = 0; $date_exists = false;
+		$date = $dataArray["response"]["data"]["data"][$key]["Stat"]["date"];
+		$statLeads = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["conversions"] - (int)((int)$dataArray["response"]["data"]["data"][$key]["Stat"]["revenue"] / 10));
+		$statPayout = (int)($dataArray["response"]["data"]["data"][$key]["Stat"]["payout"]);
+		
+		foreach($writeArray as $key3 => $value3){	
+			if($date == $writeArray[$key3][0] && $statLeads != 0 && $statPayout != 0){
+				//print_r("Order: ".$order." - ".$date ."==". $writeArray[$key3][0]."\n");
+				$index1 = ($order+7)*2+0;
+				$index2 = ($order+7)*2+1;
+				$writeArray[$key3][$index1] = "".strval($statLeads);
+				$writeArray[$key3][$index2] = "".strval($statPayout);
+				//$writeArray[$key3][$index1] = 8;
+				//$writeArray[$key3][$index2] = "8";
+				//print_r("writeArray[".$key3."][".$index1."]=".strval($statLeads)."(".$writeArray[$key3][$index1].")\n");
+			}
+		}
+	}
+	
+	if($order == 3){
+		//var_dump($writeArray[1]);
+		$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+		//$range = 'QApnl!A2:X32';
+
+		//$requestBody = new Google_Service_Sheets_ClearValuesRequest();
+		//$response = $service->spreadsheets_values->clear($spreadsheetId, $range, $requestBody);
+		
+		$range = 'QApnl!A2:X';
+		//print_r("Write pushQA pnl\n");
+		// Write values to Schedule js
+		$values = $writeArray;
+		$body = new Google_Service_Sheets_ValueRange([
+			'values' => $values
+		]);
+		$params = [
+			'valueInputOption' => 'USER_ENTERED'
+		];
+		$result = $service->spreadsheets_values->update($spreadsheetId, $range,
+			$body, $params);
+		printf("%d cells updated.\n", $result->getUpdatedCells());
+	}
+	//	writeQApnl($writeArray, $service);
 }
 
 ?>

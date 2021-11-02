@@ -3,7 +3,7 @@
 
 <head>
 
-	<style>
+	<!--<style>
 		#myProgress {
 			width: 100%;
 			background-color: #ddd;
@@ -198,10 +198,10 @@
 				document.getElementById("sign_in").innerHTML = "Signed in";
 			}
 		}
-	</script>
+	</script>-->
 </head>
 <body onload="startTime()">
-	<table><tr>
+	<!--<table><tr>
 		<td style="width: 200px;">Current time: <div id="txt"></div></br></td>
 		<td style="width: 400px;">Current settings: </br>
 								Year:  <div style="display:inline" id="year"></div><br>
@@ -222,13 +222,9 @@
 				<td>FTpnl</td><td><div id="myProgress"><div id="FTpnl_pr" class="myBar">10%</div></div></td><td><div id="FTpnl">0</div></td>
 			</tr><tr>			
 				<td>Schedule update</td><td><div id="myProgress"><div id="Schedule_pr" class="myBar">10%</div></div></td><td><div id="Schedule">0</div></td>
-			</tr><!--<tr>			
-				<td>Dating PNL</td><td><div id="myProgress"><div id="DTpnl_pr" class="myBar">10%</div></div></td><td><div id="DTpnl">0</td>
-			</tr>--><!--<tr>
-				<td>Affiliate invoices</td><td><div id="myProgress"><div id="Aff_invoice_pr" class="myBar">10%</div></div></td><td><div id="Aff_invoice">0</td>
-			</tr>--><tr>
+			</tr><tr>
 				<td>Payouts</td><td><div id="myProgress"><div id="Payouts_pr" class="myBar">10%</div></div></td><td><div id="Payout">0</td>
-				<tr>
+			</tr><tr>
 				<td>Invoice generation</td><td><div id="myProgress"><div id="Invoices_pr" class="myBar">10%</div></div></td><td><div id="Invoice">0</td>
 			</tr><tr>
 				<td>Traffic per day</td><td><div id="myProgress"><div id="Traffic_pr" class="myBar">10%</div></div></td><td><div id="Traffic">0</td>
@@ -241,20 +237,18 @@
 	<p>Manual testing buttons</p>
 	<button id="test1" onclick="test_loadDoc1()">Test FTpnl</button></br>
 	<button id="test2" onclick="test_loadDoc2()">Test Schedule update</button></br>
-	<!--<button id="test3" onclick="test_loadDoc3()">Test Super PNL</button></br>-->
-	<!--<button id="test5" onclick="test_loadDoc5()">Test Affiliate invoices</button>
-	Skip: <input type="number" value="30" id="skip" style="width: 50px;"></input></br>-->
 	<button id="test6" onclick="test_loadDoc6()">Test Payouts</button></br>
-	<!--<button id="test7" onclick="addAllSheets(month)">Add Sheets to Affiliates</button><br>-->
-	<!--<button id="test8" onclick="test_loadDoc8()">Test DTpnl</button><br>-->
 	<button id="test9" onclick="move_progress('Invoices_pr'); invoiceGen_HasoffersCall(document.getElementById('invoices_month').value, 1)">Test invoiceGen</button>
 	For month: <input type="number" value="" id="invoices_month" style="width: 50px;"></input> and year <input type="number" value="" id="invoices_year" style="width: 50px;"></input></br>
-	<!--<button id="test8" onclick="test_loadDoc9()">Test Daily Traffic</button><input style="display:none;" type="date" id="myDate" value=""><br>-->
-	<a href="./next_month_form.html">Settings</a>
+	-->
+	<form action="./next_month_form.html">
+		<input type="submit" value="Settings" />
+	</form>
+	<!--<a href="./next_month_form.html">Settings</a>
 	<script>
 		document.getElementById("year").innerHTML = year;
 		document.getElementById("month").innerHTML = month;
 		document.getElementById("file").innerHTML = "<a href='https://docs.google.com/spreadsheets/d/"+Schedule_url+"'>Schedule</a>";
-	</script>
+	</script>-->
 </body>
 </html>
