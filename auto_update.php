@@ -2,6 +2,7 @@
 
 //require 'C:/OpenServer/modules/php/PHP_7.2/vendor/autoload.php';
 require '/usr/share/php/vendor/autoload.php';
+$config = include 'config.php';
 
 if (php_sapi_name() != 'cli') {
     throw new Exception('This application must be run on the command line.');
@@ -108,8 +109,7 @@ $service = new Google_Service_Sheets($client);
 
 // Prints the names and majors of students in a sample spreadsheet:
 // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-//$spreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
-$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+$spreadsheetId = $config['spreadsheet_id'];
 $range = 'Today Traffic!A1:F';
 $response = $service->spreadsheets_values->get($spreadsheetId, $range);
 $values = $response->getValues();
@@ -205,7 +205,7 @@ $service = new Google_Service_Sheets($client);
 // Prints the names and majors of students in a sample spreadsheet:
 // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
 //$spreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
-$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+$spreadsheetId = $config['spreadsheet_id'];
 $range = 'Yesterday Traffic!A1:F';
 $response = $service->spreadsheets_values->get($spreadsheetId, $range);
 $values = $response->getValues();
@@ -280,12 +280,12 @@ printf("%d cells updated.\n", $result->getUpdatedCells());
 
     ----------------------------------------------------  */
 
-$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+$spreadsheetId = $config['spreadsheet_id'];
 $range = 'Month Traffic!A1:H';
 
 $ch = curl_init();
-$first_date = date('Y-m-01');
-$last_date = date('Y-m-t');
+$first_date = date('Y-m-01', strtotime($config['year'].'-'.$config['month'].'-01'));
+$last_date =  date('Y-m-t',  strtotime($config['year'].'-'.$config['month'].'-01'));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_URL, "https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Offer.name&fields[]=Affiliate.company&fields[]=Stat.payout&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&filters[Category.id][conditional]=EQUAL_TO&filters[Category.id][values]=1&filters[Stat.payout][conditional]=NOT_EQUAL_TO&filters[Stat.payout][values]=0&sort[Offer.name]=asc&sort[Stat.conversions]=desc&limit=5000&data_start=".$first_date."&data_end=".$last_date);
 $result=curl_exec($ch);
@@ -372,9 +372,9 @@ $pushQAoffers = ["LoveMatch", "LuckyDating", "PerfectMatch", "40pluslove"];
 
 $writeArray = [];
 
-$year = date('Y');
-$month = date('m');
-$last_date = date("t");
+$year = date('Y', strtotime($config['year'].'-'.$config['month'].'-01'));
+$month = date('m', strtotime($config['year'].'-'.$config['month'].'-01'));
+$last_date = date('t', strtotime($config['year'].'-'.$config['month'].'-01'));
 
 for($i = 1; $i < $last_date; $i++){
 	$date_format = new DateTime($year."-".$month."-".$i);
@@ -392,10 +392,11 @@ foreach($pushQAoffers as $key2 => $value2){
 }
 
 function QApnl($order, $offer_name, $service) {
+	global $config;
 	global $writeArray;
 	//print_r($order.": ".$offer_name."\n");
-	$first_date = date('Y-m-01');
-	$last_date = date('Y-m-t');
+	$first_date = date('Y-m-01', strtotime($config['year'].'-'.$config['month'].'-01'));
+	$last_date = date('Y-m-t', strtotime($config['year'].'-'.$config['month'].'-01'));
 	
 	if( $offer_name == "Medium Amanda" ){ // exclude Push offers which are in different columns
 		$url ="https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Goal.name][conditional]=LIKE&filters[Goal.name][values]=lead&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]=".$first_date."&filters[Stat.date][values][]=".$last_date."&filters[Category.name][conditional]=LIKE&filters[Category.name][values]=Medium+Amanda&limit=1000";
@@ -442,7 +443,7 @@ function QApnl($order, $offer_name, $service) {
 	
 	if($order == 6){
 		//var_dump($writeArray[1]);
-		$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+		$spreadsheetId = $config['spreadsheet_id'];
 		$range = 'QApnl!A2:X32';
 
 		$requestBody = new Google_Service_Sheets_ClearValuesRequest();
@@ -466,10 +467,11 @@ function QApnl($order, $offer_name, $service) {
 }
 
 function pushQApnl($order, $offer_name, $service) {
+	global $config;
 	global $writeArray;
 	//print_r($order.": ".$offer_name."\n");
-	$first_date = date('Y-m-01');
-	$last_date = date('Y-m-t');
+	$first_date = date('Y-m-01', strtotime($config['year'].'-'.$config['month'].'-01'));
+	$last_date = date('Y-m-t', strtotime($config['year'].'-'.$config['month'].'-01'));
 	
 	$url ="https://psflc.api.hasoffers.com/Apiv3/json?NetworkToken=NETvgwPirxWahAF3mj5WHJs2HT5tLv&Target=Report&Method=getStats&fields[]=Stat.date&fields[]=Offer.name&fields[]=Stat.clicks&fields[]=Stat.conversions&fields[]=Stat.revenue&fields[]=Stat.payout&filters[Goal.name][conditional]=LIKE&filters[Goal.name][values]=lead&filters[Stat.date][conditional]=BETWEEN&filters[Stat.date][values][]=".$first_date."&filters[Stat.date][values][]=".$last_date."&filters[Offer.name][conditional]=LIKE&filters[Offer.name][values][]=%Push+Flow%&limit=1000";
 
@@ -508,7 +510,7 @@ function pushQApnl($order, $offer_name, $service) {
 	
 	if($order == 3){
 		//var_dump($writeArray[1]);
-		$spreadsheetId = '1w2D4XsJ2Ya-iEhcwfWI-lTbdZ7O8eGTFDFhDZtcmZPs';
+		$spreadsheetId = $config['spreadsheet_id'];
 		//$range = 'QApnl!A2:X32';
 
 		//$requestBody = new Google_Service_Sheets_ClearValuesRequest();
