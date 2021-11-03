@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<form action="https://new.topaz.md/upload/ckUpload/set_values.php" method="get">
+	<form action="http://24.143.176.130/621inc/PHPMailer/set_config.php" method="post">
 		Select current month:<br>
-		<select name="month" style="width:200px;">
+		<select name="month" id="month" style="width:200px;">
 			<option value="1">January</option>
 			<option value="2">February</option>
 			<option value="3">March</option>
@@ -18,13 +18,18 @@
 			<option value="12">December</option>
 		</select>
 		<br>Select current year:<br>
-		<input name="year" type="number" value="2021" min="2021" max="2050" style="width:200px;">
+		<input name="year" id="year" type="number" value="2021" min="2021" max="2050" style="width:200px;">
 		<br>Schedule file id<br>
-		<input name="schedule" type="text" style="width:400px;" placeholder="44 digit file id" value="1IRdQN1hj76azYkOJ70om4ctm95V1QFmcyJNQUvG5Tvk">
+		<input name="spreadsheet_id" type="text" style="width:400px;" placeholder="44 digit file id" value="1IRdQN1hj76azYkOJ70om4ctm95V1QFmcyJNQUvG5Tvk">
 		<!--<br>Quality report file id<br>
 		<input name="quality" type="text" style="width:400px;" placeholder="44 digit file id" value="1e1PJ9fMiCp2kmboZBXYhwlPrhmgV_K5vDlMnG8CFp0g">-->
 		<br>
 		<input type="submit">
 	</form>
+	<script>
+		var date = new Date();
+		document.getElementById("year").innerHTML = date.getFullYear();
+		document.getElementById("month").innerHTML = date.getMonth() + 1;
+	</script>
 </body>
 </html>
