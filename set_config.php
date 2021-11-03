@@ -15,6 +15,6 @@ return array(
 
 fwrite($file_handle, $data_to_write);
 fclose($file_handle);
-header("Location: https://beljjvalentin.github.io/auto-updater/next_month_form.html"); 
+//header("Location: https://beljjvalentin.github.io/auto-updater/next_month_form.html"); 
 
 ?> 
